@@ -1,16 +1,16 @@
 {
-  "name": "{{PKG_NAME}}",
-  "description": "{{PKG_DESC}}",
-  "version": "{{PKG_VERS}}",
+  "name": "Book of Shadows",
+  "description": "Create and play D&D adventures",
+  "version": "0.1.0",
   "maintainers": [
     {
-      "name": "{{PKG_AUTHOR}}",
-      "email": "{{PKG_USEREMAIL}}",
-      "web": "{{PKG_USERURI}}"
+      "name": "Igor Padoim",
+      "email": "igorpadoim@gmail.com",
+      "web": "https://nereare.com/"
     }
   ],
   "bugs": {
-    "web": "https://github.com/{{PKG_USERNAME}}/{{PKG_REPO}}/issues"
+    "web": "https://github.com/Nereare/shadows/issues"
   },
-  "license": "{{PKG_LICENSE_SPDX}}"
+  "license": "Hippocratic-3"
 }
