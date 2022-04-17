@@ -1,3 +1,4 @@
+<?php if ( $auth->isLoggedIn() ) { ?>
 <footer class="footer">
   <div class="content has-text-centered">
     <p>
@@ -14,6 +15,7 @@
     </p>
   </div>
 </footer>
+<?php } ?>
 
 <?php if ( !isset($_COOKIES["accept_cookies"]) && !isset($_SESSION["cookies"]) ){ ?>
   <div class="modal is-active" id="cookie-consent">

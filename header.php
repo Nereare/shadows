@@ -1,6 +1,20 @@
 <?php
+require "vendor/autoload.php";
 require "scripts/meta.php";
 session_start();
+
+$db = new \PDO(
+  'mysql:dbname=test;host=localhost;charset=utf8mb4',
+  'test',
+  '123456789'
+);
+$auth = new \Delight\Auth\Auth($db);
+
+/* Login info
+Email: baka.off@gmail.com
+Pw: 080690
+User: Nereare
+ */
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,6 +45,62 @@ session_start();
   </head>
 
   <body>
+
+    <?php
+    if ( !$auth->isLoggedIn() ) {
+    ?>
+    <section class="hero is-primary is-fullheight">
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column is-6">
+              <div class="box">
+                <div class="has-text-centered">
+                  <figure class="image is-128x128 is-inline-block">
+                    <img src="assets/Favicon.svg">
+                  </figure>
+                </div>
+
+                <div class="field">
+                  <label for="login-user" class="label">Email</label>
+                  <div class="control has-icons-left">
+                    <input type="text" class="input" id="login-user" placeholder="Username">
+                    <span class="icon is-small is-left">
+                      <i class="mdi mdi-account"></i>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="login-pw" class="label">Password</label>
+                  <div class="control has-icons-left">
+                    <input type="password" class="input" id="login-pw" placeholder="Password">
+                    <span class="icon is-small is-left">
+                      <i class="mdi mdi-lock"></i>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <input type="checkbox" class="is-checkradio" id="login-remember">
+                  <label for="login-remember">Remember Me</label>
+                </div>
+
+                <div class="field is-expanded" id="login-do">
+                  <button class="button is-success is-fullwidth">
+                    Login
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="js/login.js"></script>
+    </section>
+    <?php
+    } else {
+    ?>
     <header class="hero is-primary">
       <div class="hero-body">
         <div class="container has-text-centered">
@@ -58,3 +128,5 @@ session_start();
         </nav>
       </div>
     </header>
+    <?php
+    }
