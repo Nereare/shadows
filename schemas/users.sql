@@ -79,5 +79,3 @@ CREATE TABLE IF NOT EXISTS `shadows`.`users_profiles` (
   PRIMARY KEY (`id`),
   KEY `user` (`user`)
 );
-
-CREATE TABLE IF NOT EXISTS `shadows`.`adventures` ();
