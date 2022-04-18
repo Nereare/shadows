@@ -5,8 +5,8 @@ session_start();
 
 $db = new \PDO(
   'mysql:dbname=test;host=localhost;charset=utf8mb4',
-  'test',
-  '123456789'
+  'shadows',
+  'shadows'
 );
 $auth = new \Delight\Auth\Auth($db);
 
