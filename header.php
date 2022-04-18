@@ -4,7 +4,7 @@ require "scripts/meta.php";
 session_start();
 
 $db = new \PDO(
-  'mysql:dbname=test;host=localhost;charset=utf8mb4',
+  'mysql:dbname=shadows;host=localhost;charset=utf8mb4',
   'shadows',
   'shadows'
 );
