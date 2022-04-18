@@ -27,4 +27,19 @@ $(document).ready(function() {
     $(".navbar-burger").toggleClass("is-active");
     $(".navbar-menu").toggleClass("is-active");
   });
+
+  // Log user out
+  $("#logout-button").on("click", function() {
+    $.ajax({
+      method: "GET",
+      url: "scripts/login.php",
+      data: {
+        do: "logout"
+      }
+    })
+      .always( function(r) {
+        location.reload();
+      });
+  });
+
 });

@@ -29,7 +29,12 @@ switch ( $_GET["do"] ) {
     catch (\Delight\Auth\AmbiguousUsernameException $e) { die("401"); }
     catch (\Delight\Auth\InvalidPasswordException $e) { die("401"); }
     catch (\Delight\Auth\EmailNotVerifiedException $e) { die("401"); }
-    catch (\Delight\Auth\TooManyRequestsException $e) { die("418"); }
+    catch (\Delight\Auth\TooManyRequestsException $e) { die("429"); }
+    catch (Exception $e) { die("418"); }
+    break;
+  case "logout":
+    $auth->logOut();
+    echo "0";
     break;
   default:
     echo "400";
