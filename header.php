@@ -100,32 +100,72 @@ User: Nereare
     <?php
     } else {
     ?>
-    <header class="hero is-primary">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <p class="title">
-            <?php echo constant("APP_NAME"); ?>
-          </p>
-          <p class="subtitle">
-            Version <?php echo constant("APP_VERSION"); ?>
-          </p>
-        </div>
+    <nav class="navbar is-primary has-shadow" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href=".">
+          <img class="mr-2" src="assets/Logo-White.svg">
+          <?php echo constant("APP_NAME"); ?>
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="main-nav">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
 
-      <div class="hero-foot">
-        <nav class="tabs is-boxed is-centered">
-          <div class="container">
-            <ul>
-              <li class="is-active">
-                <a>Play</a>
-              </li>
-              <li>
-                <a>Write</a>
-              </li>
-            </ul>
+      <div id="main-nav" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item">
+            <span class="icon">
+              <i class="mdi mdi-gamepad-variant"></i>
+            </span>
+            <span>Play</span>
+          </a>
+          <a class="navbar-item">
+            <span class="icon">
+              <i class="mdi mdi-pencil"></i>
+            </span>
+            <span>Write</span>
+          </a>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              <span class="icon">
+                <i class="mdi mdi-account"></i>
+              </span>
+              <span><?php echo $auth->getUsername(); ?></span>
+            </a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item">
+                <span class="icon">
+                  <i class="mdi mdi-face-woman-profile"></i>
+                </span>
+                <span>Profile</span>
+              </a>
+              <a class="navbar-item">
+                <span class="icon">
+                  <i class="mdi mdi-cog"></i>
+                </span>
+                <span>Settings</span>
+              </a>
+              <a class="navbar-item">
+                <span class="icon">
+                  <i class="mdi mdi-library"></i>
+                </span>
+                <span>My Tales</span>
+              </a>
+              <hr class="navbar-divider">
+              <a id="logout-button" class="navbar-item">
+                <span class="icon">
+                  <i class="mdi mdi-logout-variant"></i>
+                </span>
+                <span>Logout</span>
+              </a>
+            </div>
           </div>
-        </nav>
+        </div>
       </div>
-    </header>
+    </nav>
     <?php
     }
