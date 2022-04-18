@@ -3,6 +3,7 @@
   <div class="content has-text-centered">
     <p>
       <strong><?php echo constant("APP_NAME"); ?></strong>
+      (<code>v.<?php echo constant("APP_VERSION"); ?></code>)
       by
       <a href="https://nereare.com"><?php echo constant("APP_AUTHOR"); ?></a>.
     </p>
