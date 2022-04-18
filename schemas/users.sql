@@ -8,7 +8,9 @@ CREATE USER IF NOT EXISTS
   PASSWORD_LOCK_TIME 7;
 GRANT ALL ON `shadows`.* TO 'shadows'@'localhost';
 
-CREATE TABLE IF NOT EXISTS `shadows`.`users` (
+USE `shadows`;
+
+CREATE TABLE IF NOT EXISTS `users` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(249) NOT NULL,
   `password` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
@@ -24,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `shadows`.`users` (
   UNIQUE KEY `email` (`email`)
 );
 
-CREATE TABLE IF NOT EXISTS `shadows`.`users_confirmations` (
+CREATE TABLE IF NOT EXISTS `users_confirmations` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` INT UNSIGNED NOT NULL,
   `email` VARCHAR(249) NOT NULL,
@@ -37,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `shadows`.`users_confirmations` (
   KEY `user_id` (`user_id`)
 );
 
-CREATE TABLE IF NOT EXISTS `shadows`.`users_remembered` (
+CREATE TABLE IF NOT EXISTS `users_remembered` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user` INT UNSIGNED NOT NULL,
   `selector` VARCHAR(24) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
@@ -48,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `shadows`.`users_remembered` (
   KEY `user` (`user`)
 );
 
-CREATE TABLE IF NOT EXISTS `shadows`.`users_resets` (
+CREATE TABLE IF NOT EXISTS `users_resets` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user` INT UNSIGNED NOT NULL,
   `selector` VARCHAR(20) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
@@ -59,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `shadows`.`users_resets` (
   KEY `user_expires` (`user`,`expires`)
 );
 
-CREATE TABLE IF NOT EXISTS `shadows`.`users_throttling` (
+CREATE TABLE IF NOT EXISTS `users_throttling` (
   `bucket` VARCHAR(44) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
   `tokens` FLOAT NOT NULL,
   `replenished_at` INT UNSIGNED NOT NULL,
@@ -68,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `shadows`.`users_throttling` (
   KEY `expires_at` (`expires_at`)
 );
 
-CREATE TABLE IF NOT EXISTS `shadows`.`users_profiles` (
+CREATE TABLE IF NOT EXISTS `users_profiles` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user` INT UNSIGNED NOT NULL,
   `first_name` VARCHAR(127) DEFAULT NULL,
