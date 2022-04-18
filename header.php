@@ -40,7 +40,6 @@ User: Nereare
     <link href="styles/main.css" rel="stylesheet" type="text/css">
 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/clipboard/dist/clipboard.min.js"></script>
     <script src="js/main.js"></script>
   </head>
 
