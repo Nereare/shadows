@@ -29,17 +29,15 @@
               <span class="icon">
                 <i class="mdi mdi-cookie-alert mdi-24px"></i>
               </span>
-              <span>Alerta de Cookies</span>
+              <span>Cookies Notice</span>
             </span>
           </p>
         </div>
         <div class="message-body">
-          <p>Este site usa <em>cookies</em> para oferecer a melhor experiência possível a seus usuários.</p>
-          <p>Ao continuar o uso deste site, você concorda com o uso destes.</p>
-          <p>Para mais informações, leia nossa <a href="cookies.php">Política de Cookies</a>.</p>
-          <p class="has-text-centered">
-            <button class="button is-success" id="cookie-accept">Condordo</button>
-            <button class="button" id="cookie-reject">Não concordo</button>
+          <p>This site uses cookies to offer the best experience to its users.</p>
+          <p>By continuing to use this site, you express your acceptance to these cookies.</p>
+          <p class="has-text-centered mt-2">
+            <button class="button is-warning" id="cookie-accept">Agree</button>
           </p>
         </div>
       </article>
