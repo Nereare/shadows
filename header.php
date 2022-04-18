@@ -85,8 +85,8 @@ User: Nereare
                   <label for="login-remember">Remember Me</label>
                 </div>
 
-                <div class="field is-expanded" id="login-do">
-                  <button class="button is-success is-fullwidth">
+                <div class="field is-expanded">
+                  <button class="button is-success is-fullwidth" id="login-do">
                     Login
                   </button>
                 </div>
