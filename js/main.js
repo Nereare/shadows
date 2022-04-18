@@ -1,5 +1,9 @@
 $(document).ready(function() {
-  //
+
+  // Set all aria-delete buttons to delete their parent elements
+  $("button.delete").on("click", function() {
+    $(this).parent().addClass("is-hidden");
+  });
 
   // Accept cookies
   $("#cookie-accept").on("click", function() {

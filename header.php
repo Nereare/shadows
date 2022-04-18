@@ -60,6 +60,23 @@ User: Nereare
                   </figure>
                 </div>
 
+                <?php
+                if ( isset( $_GET["reply"] ) && $_GET["reply"] != "0" ) {
+                  $reply = [
+                    "401" => "Wrong username and/or password.",
+                    "429" => "What are you trying? To brute-force me into opening up to you? Such an abuser...",
+                    "418" => "But I am but a humble teapot...",
+                    "500" => "The server seems to be a little bit sleepy. Try again."
+                  ];
+                ?>
+                <div class="notification is-danger is-light">
+                  <button class="delete"></button>
+                  <p><?php echo $reply[ $_GET["reply"] ]; ?></p>
+                </div>
+                <?php
+                }
+                ?>
+
                 <div class="field">
                   <label for="login-user" class="label">Email</label>
                   <div class="control has-icons-left">
