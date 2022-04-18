@@ -56,7 +56,7 @@ User: Nereare
               <div class="box">
                 <div class="has-text-centered">
                   <figure class="image is-128x128 is-inline-block">
-                    <img src="assets/Favicon.svg">
+                    <img src="assets/Logo.svg">
                   </figure>
                 </div>
 
