@@ -3,11 +3,13 @@ require "vendor/autoload.php";
 require "scripts/meta.php";
 session_start();
 
-$db = new \PDO(
-  'mysql:dbname=shadows;host=localhost;charset=utf8mb4',
-  'shadows',
-  'shadows'
-);
+try {
+  $db = new \PDO(
+    'mysql:dbname=shadows;host=localhost;charset=utf8mb4',
+    'shadows',
+    'shadows'
+  );
+} catch (\PDOException $e) { die("500"); }
 $auth = new \Delight\Auth\Auth($db);
 
 /* Login info
