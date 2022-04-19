@@ -71,13 +71,11 @@ CREATE TABLE IF NOT EXISTS `users_throttling` (
 );
 
 CREATE TABLE IF NOT EXISTS `users_profiles` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user` INT UNSIGNED NOT NULL,
+  `uid` INT UNSIGNED NOT NULL,
   `first_name` VARCHAR(127) DEFAULT NULL,
   `last_name` VARCHAR(255) DEFAULT NULL,
   `location` VARCHAR(255) DEFAULT NULL,
   `birth` DATE DEFAULT NULL,
   `about` TEXT DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user` (`user`)
+  PRIMARY KEY (`id`)
 );
