@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `users_throttling` (
 );
 
 CREATE TABLE IF NOT EXISTS `users_profiles` (
-  `uid` INT UNSIGNED NOT NULL,
+  `id` INT UNSIGNED NOT NULL,
   `first_name` VARCHAR(127) DEFAULT NULL,
   `last_name` VARCHAR(255) DEFAULT NULL,
   `location` VARCHAR(255) DEFAULT NULL,
