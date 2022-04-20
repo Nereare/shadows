@@ -11,6 +11,8 @@ try {
   );
 } catch (\PDOException $e) { die("500"); }
 $auth = new \Delight\Auth\Auth($db);
+$md   = new Parsedown();
+$md->setSafeMode(true);
 
 /* Login info
 Email: baka.off@gmail.com
@@ -156,7 +158,7 @@ User: Nereare
             </a>
 
             <div class="navbar-dropdown">
-              <a class="navbar-item">
+              <a class="navbar-item" href="profile.php">
                 <span class="icon">
                   <i class="mdi mdi-face-woman-profile"></i>
                 </span>
