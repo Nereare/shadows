@@ -13,12 +13,6 @@ try {
 $auth = new \Delight\Auth\Auth($db);
 $md   = new Parsedown();
 $md->setSafeMode(true);
-
-/* Login info
-Email: baka.off@gmail.com
-Pw: 080690
-User: Nereare
- */
 ?>
 <!DOCTYPE html>
 <html>
