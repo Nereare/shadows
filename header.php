@@ -9,10 +9,13 @@ try {
     'shadows',
     'shadows'
   );
-} catch (\PDOException $e) { die("500"); }
-$auth = new \Delight\Auth\Auth($db);
-$md   = new Parsedown();
-$md->setSafeMode(true);
+} catch (\PDOException $e) { $notInstalled = true; }
+
+if ( !isset($notInstalled) ) {
+  $auth = new \Delight\Auth\Auth($db);
+  $md   = new Parsedown();
+  $md->setSafeMode(true);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,16 +38,57 @@ $md->setSafeMode(true);
     <link href="node_modules/typeface-montserrat/index.css" rel="stylesheet" type="text/css">
     <link href="node_modules/typeface-roboto-mono/index.css" rel="stylesheet" type="text/css">
     <link href="node_modules/normalize.css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="node_modules/simplemde/dist/simplemde.min.css" rel="stylesheet" type="text/css">
     <link href="styles/main.css" rel="stylesheet" type="text/css">
 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/simplemde/dist/simplemde.min.js"></script>
     <script src="js/main.js"></script>
   </head>
 
   <body>
 
     <?php
-    if ( !$auth->isLoggedIn() ) {
+    if ( isset($notInstalled) ) {
+    ?>
+    <section class="hero is-primary is-fullheight">
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column is-6">
+              <div class="box">
+                <div class="has-text-centered">
+                  <figure class="image is-128x128 is-inline-block">
+                    <img src="assets/Logo.svg">
+                  </figure>
+                </div>
+
+                <h2 class="title is-4">
+                  <span class="icon-text has-text-primary">
+                    <span class="icon">
+                      <i class="mdi mdi-alert-circle"></i>
+                    </span>
+                    <span>Oopsie...</span>
+                  </span>
+                </h2>
+
+                <div class="content">
+                  <p>
+                    We apologize for the inconvenience, but it seems this application is not yet installed.
+                  </p>
+                  <p>
+                    Please, contact the domain manager for further information.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="js/login.js"></script>
+    </section>
+    <?php
+    } elseif ( !$auth->isLoggedIn() ) {
     ?>
     <section class="hero is-primary is-fullheight">
       <div class="hero-body">

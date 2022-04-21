@@ -1,7 +1,7 @@
 {
   "name": "shadows",
   "description": "Create and play D&D adventures",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "author": "Igor Padoim <igorpadoim@gmail.com>",
   "maintainers": [
     {
@@ -24,6 +24,7 @@
     "bulma-switch": "^2.0.4",
     "jquery": "^3.6.0",
     "normalize.css": "^8.0.1",
+    "simplemde": "^1.11.2",
     "typeface-montserrat": "^1.1.13",
     "typeface-roboto-mono": "^1.1.13"
   }
