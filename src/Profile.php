@@ -138,9 +138,10 @@ final class Profile {
       try {
         $stmt = $this->conn->prepare(
           "INSERT INTO `shadows`.`users_profiles`
-            (`first_name`, `last_name`, `location`, `birth`, `about`)
-            VALUES (:firstname, :lastname, :location, :birth, :about)"
+            (`id`, `first_name`, `last_name`, `location`, `birth`, `about`)
+            VALUES (:uid, :firstname, :lastname, :location, :birth, :about)"
         );
+        $stmt->bindParam(":uid", $this->uid);
         $stmt->bindParam(":firstname", $firstName);
         $stmt->bindParam(":lastname", $lastName);
         $stmt->bindParam(":location", $location);
