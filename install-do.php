@@ -17,7 +17,7 @@ function runExec($query, $msg, $db) {
   }
   if ( $result === false ) {
     // Query Error
-    $install[5] = [
+    return [
       "title" => "Query Error",
       "msg" => "The query affected no rows.",
       "state" => "danger",
