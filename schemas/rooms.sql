@@ -39,3 +39,32 @@ CREATE TABLE IF NOT EXISTS `rooms_checks` (
   PRIMARY KEY (`id`),
   KEY `room` (`room`)
 );
+
+CREATE TABLE IF NOT EXISTS `rooms_combats` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `room` INT UNSIGNED NOT NULL,
+  `desc` TEXT NOT NULL,
+  `enemies` JSON NOT NULL,
+  `is_runnable` BOOLEAN NOT NULL DEFAULT FALSE,
+  `is_hideable` BOOLEAN NOT NULL DEFAULT FALSE,
+  `stealth_dc` TINYINT DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `room` (`room`)
+);
+
+CREATE TABLE IF NOT EXISTS `rooms_exits` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `room` INT UNSIGNED NOT NULL,
+  `exit` INT UNSIGNED NOT NULL,
+  `is_hidden` BOOLEAN NOT NULL DEFAULT FALSE,
+  `investigation_dc` TINYINT DEFAULT NULL,
+  `is_locked` BOOLEAN NOT NULL DEFAULT FALSE,
+  `thievestools_dc` TINYINT DEFAULT NULL,
+  `is_breakable` BOOLEAN NOT NULL DEFAULT FALSE,
+  `strength_dc` TINYINT DEFAULT NULL,
+  `has_sounds` BOOLEAN NOT NULL DEFAULT FALSE,
+  `perception_dc` TINYINT DEFAULT NULL,
+  `sounds_desc` TEXT DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `room` (`room`)
+);
