@@ -203,7 +203,7 @@ if ( !isset($notInstalled) ) {
                 </span>
                 <span>Profile</span>
               </a>
-              <a class="navbar-item">
+              <a class="navbar-item" href="settings.php">
                 <span class="icon">
                   <i class="mdi mdi-cog"></i>
                 </span>
