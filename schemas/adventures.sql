@@ -7,9 +7,11 @@ CREATE TABLE IF NOT EXISTS `adventures` (
   `cover` VARCHAR(255) DEFAULT NULL,
   `desc` MEDIUMTEXT NOT NULL,
   `setting` VARCHAR(63) DEFAULT NULL,
+  `triggers` VARCHAR(1023) DEFAULT NULL,
   `entry` INT UNSIGNED NOT NULL,
   `level_init` TINYINT UNSIGNED DEFAULT 1,
   `level_end` TINYINT UNSIGNED DEFAULT 12,
+  `pcs` TINYINT UNSIGNED DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE KEY `entry` (`entry`),
   KEY `author` (`author`)
