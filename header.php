@@ -43,6 +43,7 @@ if ( !isset($notInstalled) ) {
 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/simplemde/dist/simplemde.min.js"></script>
+    <script src="node_modules/@creativebulma/bulma-tagsinput/dist/js/bulma-tagsinput.min.js"></script>
     <script src="js/main.js"></script>
   </head>
 

@@ -21,6 +21,13 @@ $(document).ready(function() {
     });
   });
 
+  // Bulma tags input setting up
+  BulmaTagsInput.attach();
+  // TEMP: Delete me for production!
+  $("#tags-show").on("click", function() {
+    alert( $("#tags").val() );
+  });
+
   // Check for click events on the navbar burger icon
   $(".navbar-burger").on("click", function() {
     // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"

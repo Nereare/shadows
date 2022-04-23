@@ -18,6 +18,7 @@
   "private": false,
   "dependencies": {
     "@creativebulma/bulma-divider": "^1.1.0",
+    "@creativebulma/bulma-tagsinput": "^1.0.3",
     "@mdi/font": "^6.6.96",
     "bulma": "^0.9.3",
     "bulma-checkradio": "^2.1.3",
