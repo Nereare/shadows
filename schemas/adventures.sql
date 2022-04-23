@@ -17,6 +17,17 @@ CREATE TABLE IF NOT EXISTS `adventures` (
   KEY `author` (`author`)
 );
 
+CREATE TABLE IF NOT EXISTS `adventures_variables` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `adventure` INT UNSIGNED NOT NULL,
+  `name` VARCHAR(31) NOT NULL,
+  `type` ENUM('string', 'integer', 'float', 'boolean', 'json') NOT NULL,
+  `value` VARCHAR(1023) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `adventure` (`adventure`),
+  KEY `name` (`name`)
+);
+
 CREATE TABLE IF NOT EXISTS `adventures_plays` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `adventure` INT UNSIGNED NOT NULL,
