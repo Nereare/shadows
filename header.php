@@ -224,6 +224,25 @@ if ( !isset($notInstalled) ) {
               </a>
             </div>
           </div>
+          <?php if ( $auth->hasRole(\Delight\Auth\Role::ADMIN) ) { ?>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              <span class="icon">
+                <i class="mdi mdi-account-supervisor"></i>
+              </span>
+              <span>Admin</span>
+            </a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item">
+                <span class="icon">
+                  <i class="mdi mdi-account-plus"></i>
+                </span>
+                <span>Create User</span>
+              </a>
+            </div>
+          </div>
+          <?php } ?>
         </div>
       </div>
     </nav>
