@@ -76,6 +76,6 @@ CREATE TABLE IF NOT EXISTS `users_profiles` (
   `last_name` VARCHAR(255) DEFAULT NULL,
   `location` VARCHAR(255) DEFAULT NULL,
   `birth` DATE DEFAULT NULL,
-  `about` TEXT DEFAULT NULL,
+  `about` TINYTEXT DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
