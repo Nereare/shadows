@@ -2,7 +2,7 @@ USE `shadows`;
 
 CREATE TABLE IF NOT EXISTS `meta_checks` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(63) NOT NULL UNIQUE,
+  `name` VARCHAR(63) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 );
@@ -44,7 +44,7 @@ INSERT INTO `meta_checks`
 
 CREATE TABLE IF NOT EXISTS `meta_items` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `code` VARCHAR(63) UNIQUE,
+  `code` VARCHAR(63),
   `name` VARCHAR(63) NOT NULL,
   `desc` TEXT NOT NULL,
   `source` VARCHAR(255),
