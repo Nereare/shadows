@@ -12,6 +12,8 @@ CREATE TABLE IF NOT EXISTS `adventures` (
   `level_init` TINYINT UNSIGNED DEFAULT 1,
   `level_end` TINYINT UNSIGNED DEFAULT 12,
   `pcs` TINYINT UNSIGNED DEFAULT 1,
+  `is_public` BOOLEAN NOT NULL DEFAULT TRUE,
+  `status` ENUM('development', 'alpha', 'beta', 'stable') NOT NULL DEFAULT 'development',
   PRIMARY KEY (`id`),
   UNIQUE KEY `entry` (`entry`),
   KEY `author` (`author`)
@@ -21,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `adventures_variables` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `adventure` INT UNSIGNED NOT NULL,
   `name` VARCHAR(31) NOT NULL,
-  `type` ENUM('string', 'integer', 'float', 'boolean', 'json') NOT NULL,
+  `type` ENUM('string', 'integer', 'float', 'boolean', 'json') NOT NULL DEFAULT 'string',
   `value` VARCHAR(1023) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `adventure` (`adventure`),
