@@ -40,4 +40,4 @@ INSERT INTO `shadows`.`meta_checks`
   ('Sleight of Hand (Dex)'),
   ('Stealth (Dex)'),
   ('Survival (Wis)'),
-  ('Thieves' Tools (Dex)');
+  ('Thieves\' Tools (Dex)');
