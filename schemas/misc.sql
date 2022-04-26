@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `meta_checks` (
   UNIQUE KEY `name` (`name`)
 );
 
-INSERT INTO `shadows`.`meta_checks`
+INSERT INTO `meta_checks`
   (`name`)
   VALUES
   ('Strength check'),
