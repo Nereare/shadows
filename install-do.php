@@ -113,7 +113,7 @@ $install[$step] = runExec(
 );
 if ( $install[$step]["fail"] ) { die( $install ); }
 
-// Step 6: Create Auth tables
+// Step 6a: Create Auth tables
 $tables = [
   [
     "users",
@@ -371,10 +371,77 @@ foreach($tables as $v) {
   if ( $install[$step]["fail"] ) { die( $install ); }
 }
 
+// Step 6b: Populate `meta_checks` table
+$inserts = [
+  "Strength check",
+  "Strength saving throw",
+  "Dexterity check",
+  "Dexterity saving throw",
+  "Constitution check",
+  "Constitution saving throw",
+  "Intelligence check",
+  "Intelligence saving throw",
+  "Wisdom check",
+  "Wisdom saving throw",
+  "Charisma check",
+  "Charisma saving throw",
+  "Acrobatics (Dex)",
+  "Animal Handling (Wis)",
+  "Arcana (Int)",
+  "Athletics (Str)",
+  "Deception (Cha)",
+  "History (Int)",
+  "Insight (Wis)",
+  "Intimidation (Cha)",
+  "Investigation (Int)",
+  "Medicina (Wis)",
+  "Nature (Int)",
+  "Perception (Wis)",
+  "Performance (Cha)",
+  "Persuasion (Cha)",
+  "Religion (Int)",
+  "Sleight of Hand (Dex)",
+  "Stealth (Dex)",
+  "Survival (Wis)",
+  "Thieves' Tools (Dex)"
+];
+
+$step++;
+$count = 0;
+try {
+  $stmt = $db->prepare( "INSERT INTO `meta_checks` (`name`) VALUES (:value)" );
+  foreach($inserts as $v) {
+    $count++;
+    $stmt->bindParam(":value", $v);
+    if ( !$stmt->execute() ) {
+      // Step 6b - Query Error
+      $install[$step] = [
+        "title" => "Query Error",
+        "msg" => "The query affected no rows.",
+        "state" => "danger"
+      ];
+      die( json_encode($install) );
+    }
+  }
+} catch (\PDOException $e) {
+  // Step 6b - Database Error
+  $install[$step] = [
+    "title" => "Database Error",
+    "msg" => $e->getMessage(),
+    "state" => "danger"
+  ];
+}
+// Step 6b - Query Error
+$install[$step] = [
+  "title" => "Table Populated",
+  "msg" => "The query affected {$count} row(s).",
+  "state" => "success"
+];
+
 $auth = new \Delight\Auth\Auth($db);
 
 try {
-  // Step 6: Register Admin user
+  // Step 7: Register Admin user
   $step++;
   $uid = $auth->registerWithUniqueUsername(
     $user_data["user_email"],
@@ -383,7 +450,7 @@ try {
   );
 }
 catch (\Delight\Auth\InvalidEmailException $e) {
-  // Step 6 - Invalid Email Error
+  // Step 7 - Invalid Email Error
   $install[$step] = [
     "title" => "Auth Error",
     "msg" => "The email was invalid.",
@@ -392,7 +459,7 @@ catch (\Delight\Auth\InvalidEmailException $e) {
   die( json_encode($install) );
 }
 catch (\Delight\Auth\InvalidPasswordException $e) {
-  // Step 6 - Invalid Password Error
+  // Step 7 - Invalid Password Error
   $install[$step] = [
     "title" => "Auth Error",
     "msg" => "Password is invalid.",
@@ -401,7 +468,7 @@ catch (\Delight\Auth\InvalidPasswordException $e) {
   die( json_encode($install) );
 }
 catch (\Delight\Auth\UserAlreadyExistsException $e) {
-  // Step 6 - User Exists Error
+  // Step 7 - User Exists Error
   $install[$step] = [
     "title" => "Auth Error",
     "msg" => "The user already exists.",
@@ -410,7 +477,7 @@ catch (\Delight\Auth\UserAlreadyExistsException $e) {
   die( json_encode($install) );
 }
 catch (\Delight\Auth\TooManyRequestsException $e) {
-  // Step 6 - Too Many Requests Error
+  // Step 7 - Too Many Requests Error
   $install[$step] = [
     "title" => "Auth Error",
     "msg" => "Too many requests, dear. Take a rest...",
@@ -419,7 +486,7 @@ catch (\Delight\Auth\TooManyRequestsException $e) {
   die( json_encode($install) );
 }
 catch (\Delight\Auth\DuplicateUsernameException $e) {
-  // Step 6 - Duplicate Username Error
+  // Step 7 - Duplicate Username Error
   $install[$step] = [
     "title" => "Auth Error",
     "msg" => "Username already exists.",
@@ -428,7 +495,7 @@ catch (\Delight\Auth\DuplicateUsernameException $e) {
   die( json_encode($install) );
 }
 catch (\Exception $e) {
-  // Step 6 - Misc Error
+  // Step 7 - Misc Error
   $install[$step] = [
     "title" => "Auth Error",
     "msg" => "Unknow error.",
@@ -436,7 +503,7 @@ catch (\Exception $e) {
   ];
   die( json_encode($install) );
 }
-// Step 6 - Success
+// Step 7 - Success
 $install[$step] = [
   "title" => "Auth Successful",
   "msg" => "Admin user (ID $uid) created successfully.",
@@ -444,14 +511,14 @@ $install[$step] = [
 ];
 
 try {
-  // Step 7: Set user as Admin
+  // Step 8: Set user as Admin
   $step++;
   $auth->admin()->addRoleForUserById(
     $uid,
     \Delight\Auth\Role::ADMIN
   );
 } catch (\Exception $e) {
-  // Step 7 - Error
+  // Step 8 - Error
   $install[$step] = [
     "title" => "Auth Error",
     "msg" => $e->getMessage(),
@@ -459,7 +526,7 @@ try {
   ];
   die( json_encode($install) );
 }
-// Step 7 - Success
+// Step 8 - Success
 $install[$step] = [
   "title" => "Auth Successful",
   "msg" => "User with ID $uid set as admin successfully.",
@@ -467,35 +534,9 @@ $install[$step] = [
 ];
 
 try {
-  // Step 8: Start admin's profile
+  // Step 9: Start admin's profile
   $step++;
   $profile = new \Nereare\Profile\Profile($db, $uid);
-} catch (\Exception $e) {
-  // Step 8 - Error
-  $install[$step] = [
-    "title" => "Profile Error",
-    "msg" => $e->getMessage(),
-    "state" => "danger"
-  ];
-  die( json_encode($install) );
-}
-// Step 8 - Success
-$install[$step] = [
-  "title" => "Profile Successful",
-  "msg" => "Profile for user with ID $uid opened successfully.",
-  "state" => "success"
-];
-
-try {
-  // Step 9: Create admin's profile
-  $step++;
-  $profile->create(
-    $user_data["user_firstname"],
-    $user_data["user_lastname"],
-    $user_data["user_location"],
-    $user_data["user_birth"],
-    $user_data["user_about"]
-  );
 } catch (\Exception $e) {
   // Step 9 - Error
   $install[$step] = [
@@ -508,11 +549,37 @@ try {
 // Step 9 - Success
 $install[$step] = [
   "title" => "Profile Successful",
+  "msg" => "Profile for user with ID $uid opened successfully.",
+  "state" => "success"
+];
+
+try {
+  // Step 10: Create admin's profile
+  $step++;
+  $profile->create(
+    $user_data["user_firstname"],
+    $user_data["user_lastname"],
+    $user_data["user_location"],
+    $user_data["user_birth"],
+    $user_data["user_about"]
+  );
+} catch (\Exception $e) {
+  // Step 10 - Error
+  $install[$step] = [
+    "title" => "Profile Error",
+    "msg" => $e->getMessage(),
+    "state" => "danger"
+  ];
+  die( json_encode($install) );
+}
+// Step 10 - Success
+$install[$step] = [
+  "title" => "Profile Successful",
   "msg" => "Profile for user with ID $uid created successfully.",
   "state" => "success"
 ];
 
-// Step 10 - Success
+// Step 11 - Success
 $install[$step] = [
   "title" => "Done",
   "msg" => "App installed. Now you may go to <a href=\".\">the main page</a> to start.",
