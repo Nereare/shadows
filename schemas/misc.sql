@@ -41,3 +41,20 @@ INSERT INTO `shadows`.`meta_checks`
   ('Stealth (Dex)'),
   ('Survival (Wis)'),
   ('Thieves\' Tools (Dex)');
+
+CREATE TABLE IF NOT EXISTS `meta_items` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `code` VARCHAR(63) UNIQUE,
+  `name` VARCHAR(63) NOT NULL,
+  `desc` TEXT NOT NULL,
+  `source` VARCHAR(255),
+  `page` TINYINT UNSIGNED,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
+);
+
+CREATE
+  DEFINER='shadows'@'localhost'
+  TRIGGER `set_item_code`
+  BEFORE INSERT ON `meta_items` FOR EACH ROW
+  SET NEW.`code` = CONCAT('IID', UNIX_TIMESTAMP());
