@@ -5,9 +5,9 @@ session_start();
 
 try {
   $db = new \PDO(
-    'mysql:dbname=shadows;host=localhost;charset=utf8mb4',
-    'shadows',
-    'shadows'
+    "mysql:dbname=shadows;host=localhost;charset=utf8mb4",
+    "shadows",
+    "shadows"
   );
 } catch (\PDOException $e) { die("500"); }
 $auth = new \Delight\Auth\Auth($db);
@@ -21,8 +21,8 @@ switch ( $_GET["do"] ) {
         $remember = (int) (60 * 60 * 24 * 365.25);
       }
       $auth->loginWithUsername(
-        $_GET['username'],
-        $_GET['password'],
+        $_GET["username"],
+        $_GET["password"],
         $remember
       );
       echo "0";
