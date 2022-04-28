@@ -16,6 +16,7 @@ if ( !isset($notInstalled) ) {
   $md   = new Parsedown();
   $md->setSafeMode(true);
 }
+if ( !isset($page) ) { $page = null; }
 ?>
 <!DOCTYPE html>
 <html>
@@ -201,7 +202,13 @@ if ( !isset($notInstalled) ) {
             </a>
 
             <div class="navbar-dropdown">
-              <a class="navbar-item">
+              <a class="navbar-item<?php echo ($page == "listusers") ? " is-active" : ""; ?>" href="<?php echo ($page == "listusers") ? "#" : "admin.php?func=listusers"; ?>">
+                <span class="icon">
+                  <i class="mdi mdi-account-group"></i>
+                </span>
+                <span>List Users</span>
+              </a>
+              <a class="navbar-item<?php echo ($page == "adduser") ? " is-active" : ""; ?>" href="<?php echo ($page == "adduser") ? "#" : "admin.php?func=adduser"; ?>">
                 <span class="icon">
                   <i class="mdi mdi-account-plus"></i>
                 </span>
@@ -219,23 +226,17 @@ if ( !isset($notInstalled) ) {
             </a>
 
             <div class="navbar-dropdown">
-              <a class="navbar-item" href="profile.php">
+              <a class="navbar-item<?php echo ($page == "profile") ? " is-active" : ""; ?>" href="<?php echo ($page == "profile") ? "#" : "profile.php"; ?>">
                 <span class="icon">
                   <i class="mdi mdi-face-woman-profile"></i>
                 </span>
                 <span>Profile</span>
               </a>
-              <a class="navbar-item" href="settings.php">
+              <a class="navbar-item<?php echo ($page == "settings") ? " is-active" : ""; ?>" href="<?php echo ($page == "settings") ? "#" : "settings.php"; ?>">
                 <span class="icon">
                   <i class="mdi mdi-cog"></i>
                 </span>
                 <span>Settings</span>
-              </a>
-              <a class="navbar-item">
-                <span class="icon">
-                  <i class="mdi mdi-library"></i>
-                </span>
-                <span>My Tales</span>
               </a>
               <hr class="navbar-divider">
               <a id="logout-button" class="navbar-item">

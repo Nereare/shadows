@@ -5,6 +5,12 @@
  * @var string  The Javascript filename without the ".js" extension.
  */
 $script = "settings";
+/**
+ * The name of the current page, if any, for checking which is the active nav
+ * menu link.
+ * @var string  The slug of the current page.
+ */
+$page = "settings";
 require_once "header.php";
 
 if ( $auth->isLoggedIn() ) {
