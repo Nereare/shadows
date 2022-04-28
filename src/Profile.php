@@ -195,8 +195,7 @@ final class Profile {
         $stmt->bindParam(":location", $location);
         $stmt->bindParam(":birth", $dob);
         $stmt->bindParam(":about", $about);
-        var_dump( $stmt );
-        var_dump( $stmt->execute() );
+        $stmt->execute();
       } catch(\PDOException $e) { throw new \Nereare\Profile\ProfileException("Database execution error."); }
     } else {
       throw new \Nereare\Profile\NoUidException("No user ID set.");
