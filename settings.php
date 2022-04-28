@@ -9,11 +9,18 @@ if ( $auth->isLoggedIn() ) {
 <main class="section">
   <div class="container">
     <div class="box">
-      <h2 class="title is-3">Settings</h2>
+      <h2 class="title is-3">
+        <span class="icon-text">
+          <span class="icon">
+            <i class="mdi mdi-cog"></i>
+          </span>
+          <span>Settings</span>
+        </span>
+      </h2>
 
       <div class="field has-addons">
         <div class="control">
-          <button class="button is-static">
+          <button class="button is-static" tabIndex="-1">
             <span class="icon">
               <i class="mdi mdi-numeric mdi-18px"></i>
             </span>
@@ -59,11 +66,18 @@ if ( $auth->isLoggedIn() ) {
         </div>
       </div>
 
-      <h3 class="title is-4">Change Password</h3>
+      <h3 class="title is-4">
+        <span class="icon-text">
+          <span class="icon">
+            <i class="mdi mdi-lock"></i>
+          </span>
+          <span>Change Password</span>
+        </span>
+      </h3>
 
       <div class="field has-addons">
         <div class="control">
-          <button class="button is-static">
+          <button class="button is-static" tabIndex="-1">
             <span class="icon">
               <i class="mdi mdi-lock-clock mdi-18px"></i>
             </span>
@@ -104,11 +118,18 @@ if ( $auth->isLoggedIn() ) {
         </div>
       </div>
 
-      <h3 class="title is-4">Profile</h3>
+      <h3 class="title is-4">
+        <span class="icon-text">
+          <span class="icon">
+            <i class="mdi mdi-face-woman-profile"></i>
+          </span>
+          <span>Profile</span>
+        </span>
+      </h3>
 
       <div class="field has-addons">
         <div class="control">
-          <button class="button is-static">
+          <button class="button is-static" tabIndex="-1">
             <span class="icon">
               <i class="mdi mdi-account mdi-18px"></i>
             </span>
