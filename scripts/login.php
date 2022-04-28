@@ -38,6 +38,39 @@ switch ( $_GET["do"] ) {
     $auth->logOut();
     echo "0";
     break;
+  case "update":
+    try {
+      $profile = new \Nereare\Profile\Profile(
+        $db,
+        $_GET["uid"]
+      );
+      $profile->update(
+        $_GET["firstname"],
+        $_GET["lastname"],
+        $_GET["location"],
+        $_GET["birth"],
+        $_GET["about"]
+      );
+    }
+    catch (\Nereare\Profile\NoUidException $e) { die("401"); }
+    catch (\Nereare\Profile\ProfileException $e) { die("500"); }
+    catch (\Nereare\Profile\InvalidUidException $e) { die("401"); }
+    catch (\Exception $e) { die("418"); }
+    echo "0";
+    break;
+  case "password":
+    try {
+      $auth->changePassword(
+        $_GET["old"],
+        $_GET["new"]
+      );
+    }
+    catch (\Delight\Auth\NotLoggedInException $e) { die("401"); }
+    catch (\Delight\Auth\InvalidPasswordException $e) { die("401"); }
+    catch (\Delight\Auth\TooManyRequestsException $e) { die("500"); }
+    catch (\Exception $e) { die("418"); }
+    echo "0";
+    break;
   default:
     echo "400";
     break;

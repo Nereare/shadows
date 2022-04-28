@@ -15,6 +15,14 @@ if ( $auth->isLoggedIn() ) {
 <main class="section">
   <div class="container">
     <div class="box">
+      <div class="notification is-light is-hidden" id="notification">
+        <button class="delete"></button>
+        <p>
+          Primar lorem ipsum dolor sit amet, consectetur
+          adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur.
+        </p>
+      </div>
+
       <h2 class="title is-3">
         <span class="icon-text">
           <span class="icon">
@@ -34,7 +42,7 @@ if ( $auth->isLoggedIn() ) {
           </button>
         </div>
         <div class="control is-expanded">
-          <input class="input" type="text" value="<?php echo $profile->getUid(); ?>" readonly>
+          <input class="input" type="text" id="user-uid" value="<?php echo $profile->getUid(); ?>" readonly>
         </div>
       </div>
 
@@ -91,7 +99,7 @@ if ( $auth->isLoggedIn() ) {
           </button>
         </div>
         <div class="control is-expanded">
-          <input class="input" type="password" placeholder="Old password">
+          <input class="input" id="password-old" type="password" placeholder="Old password">
         </div>
       </div>
 
@@ -105,16 +113,18 @@ if ( $auth->isLoggedIn() ) {
           </button>
         </div>
         <div class="control is-expanded">
-          <input class="input" type="password" placeholder="New password">
+          <input class="input" id="password-new1" type="password" placeholder="New password">
         </div>
         <div class="control is-expanded">
-          <input class="input" type="password" placeholder="Repeat new password">
+          <input class="input" id="password-new2" type="password" placeholder="Repeat new password">
         </div>
       </div>
 
       <div class="field">
         <div class="control is-expanded">
-          <button class="button is-primary is-fullwidth">Change password</button>
+          <button class="button is-primary is-fullwidth" id="password-button">
+            Change password
+          </button>
         </div>
       </div>
 
@@ -193,7 +203,9 @@ if ( $auth->isLoggedIn() ) {
 
       <div class="field">
         <div class="control is-expanded">
-          <button class="button is-primary is-fullwidth">Update Profile</button>
+          <button class="button is-primary is-fullwidth" id="update-button">
+            Update Profile
+          </button>
         </div>
       </div>
     </div>
