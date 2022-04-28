@@ -34,7 +34,7 @@ if ( $auth->isLoggedIn() ) {
 
       <div class="field has-addons">
         <div class="control">
-          <button class="button is-static">
+          <button class="button is-static" tabIndex="-1">
             <span class="icon">
               <i class="mdi mdi-at mdi-18px"></i>
             </span>
@@ -48,7 +48,7 @@ if ( $auth->isLoggedIn() ) {
 
       <div class="field has-addons">
         <div class="control">
-          <button class="button is-static">
+          <button class="button is-static" tabIndex="-1">
             <span class="icon">
               <i class="mdi mdi-email mdi-18px"></i>
             </span>
@@ -91,7 +91,7 @@ if ( $auth->isLoggedIn() ) {
 
       <div class="field has-addons">
         <div class="control">
-          <button class="button is-static">
+          <button class="button is-static" tabIndex="-1">
             <span class="icon">
               <i class="mdi mdi-lock-plus mdi-18px"></i>
             </span>
@@ -146,7 +146,7 @@ if ( $auth->isLoggedIn() ) {
 
       <div class="field has-addons">
         <div class="control">
-          <button class="button is-static">
+          <button class="button is-static" tabIndex="-1">
             <span class="icon">
               <i class="mdi mdi-map mdi-18px"></i>
             </span>
@@ -160,7 +160,7 @@ if ( $auth->isLoggedIn() ) {
 
       <div class="field has-addons">
         <div class="control">
-          <button class="button is-static">
+          <button class="button is-static" tabIndex="-1">
             <span class="icon">
               <i class="mdi mdi-cake-variant mdi-18px"></i>
             </span>
