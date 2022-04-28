@@ -517,6 +517,10 @@ try {
     $uid,
     \Delight\Auth\Role::ADMIN
   );
+  $auth->admin()->addRoleForUserById(
+    $uid,
+    \Delight\Auth\Role::MANAGER
+  );
 } catch (\Exception $e) {
   // Step 8 - Error
   $install[$step] = [
