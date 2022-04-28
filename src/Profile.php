@@ -155,6 +155,55 @@ final class Profile {
   }
 
   /**
+   * Updates the database register of an user's profile.
+   *
+   * This method updates a profile, given the profile manager object created
+   * references one.
+   *
+   * If there is no user set, it throws an exception.
+   *
+   * @param  string $firstName               The first name of the user.
+   * @param  string $lastName                The last (and possibly middle) name/s of the user.
+   * @param  string $location                Any string description of the user's location.
+   * @param  string $birth                   The date of birth in the ISO 8601 format.
+   * @param  string $about                   A freeform description the user sets for themselves.
+   *
+   * @throws ProfileException                Thrown if the SQL query is invalid, usually when you try to create duplicate entries.
+   * @throws NoUidException                  Thrown if you try to invoke this method from a profile manager with no user ID set.
+   *
+   * @return void
+   */
+  public function update($firstName, $lastName, $location, $birth, $about) {
+    if ( $this->uid != null ) {
+      try { $dob = new \DateTime( $birth ); }
+      catch (Exception $e) { $dob = new \DateTime(); }
+      $dob = $dob->format('Y-m-d');
+
+      try {
+        $stmt = $this->conn->prepare(
+          "UPDATE `users_profiles` SET
+            `first_name` = :firstname,
+            `last_name` = :lastname,
+            `location` = :location,
+            `birth` = :birth,
+            `about` = :about
+            WHERE `id` = :uid"
+        );
+        $stmt->bindParam(":uid", $this->uid);
+        $stmt->bindParam(":firstname", $firstName);
+        $stmt->bindParam(":lastname", $lastName);
+        $stmt->bindParam(":location", $location);
+        $stmt->bindParam(":birth", $dob);
+        $stmt->bindParam(":about", $about);
+        var_dump( $stmt );
+        var_dump( $stmt->execute() );
+      } catch(\PDOException $e) { throw new \Nereare\Profile\ProfileException("Database execution error."); }
+    } else {
+      throw new \Nereare\Profile\NoUidException("No user ID set.");
+    }
+  }
+
+  /**
    * Retrieves the user's data, given an user ID was set.
    *
    * @param  int    $uid               The user's ID.
