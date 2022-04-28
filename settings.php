@@ -1,4 +1,10 @@
 <?php
+/**
+ * This string, if set, will be used to include a custom Javascript file to the
+ * page.
+ * @var string  The Javascript filename without the ".js" extension.
+ */
+$script = "settings";
 require_once "header.php";
 
 if ( $auth->isLoggedIn() ) {
