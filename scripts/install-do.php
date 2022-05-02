@@ -1,6 +1,6 @@
 <?php
-require "vendor/autoload.php";
-require "scripts/meta.php";
+require "../vendor/autoload.php";
+require "../scripts/meta.php";
 session_start();
 
 function runExec($query, $msg, $db) {
@@ -591,7 +591,7 @@ $install[$step] = [
 // Step 11 - Set PHPMailer data
 $step++;
 $admin_code = \Delight\Auth\Auth::createRandomString(64);
-$config_file = fopen( "scripts/config.php", "w" );
+$config_file = fopen( "../scripts/config.php", "w" );
 $config = "<?php
 define(\"APP_MAIL_HOST\", \"{$user_data["email_host"]}\");
 define(\"APP_MAIL_PORT\", \"{$user_data["email_port"]}\");
@@ -610,8 +610,8 @@ $install[$step] = [
 
 // Step 12 - Send welcome email
 $step++;
-if ( is_readable( "scripts/config.php" ) ) {
-  include( "scripts/config.php" );
+if ( is_readable( "../scripts/config.php" ) ) {
+  include( "../scripts/config.php" );
   $mail = new \PHPMailer\PHPMailer\PHPMailer();
   $mail->isSMTP();
   $mail->Host       = constant("APP_MAIL_HOST");

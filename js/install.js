@@ -51,7 +51,7 @@ $(document).ready(function() {
       // AJAX Request
       $.ajax({
         method: "GET",
-        url: "install-do.php",
+        url: "scripts/install-do.php",
         data: {
           mysql_username: mysql_username,
           mysql_password: mysql_password,
