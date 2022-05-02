@@ -77,6 +77,14 @@ session_start();
               <a href="<?php echo constant("APP_REPO"); ?>">repository</a>.
             </p>
           </div>
+
+          <div class="notification is-warning is-light">
+            <p>
+              All fields whose label has an asterisk (<code>*</code>) are
+              required!
+              Failing to fill these will stop the installation logic short.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -109,14 +117,6 @@ session_start();
             </p>
           </div>
 
-          <div class="notification is-warning is-light">
-            <p>
-              All fields whose label has an asterisk (<code>*</code>) are
-              required!
-              Failing to fill these will stop the installation logic short.
-            </p>
-          </div>
-
           <div class="field has-addons">
             <div class="control">
               <button class="button is-static" tabindex="-1">MySQL Username*</button>
@@ -132,6 +132,87 @@ session_start();
             </div>
             <div class="control is-expanded">
               <input class="input required" id="mysql-password" type="password" placeholder="MySQL User password">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="box">
+          <h2 class="title is-3">
+            <span class="icon-text">
+              <span class="icon">
+                <i class="mdi mdi-email"></i>
+              </span>
+              <span>Email Settings</span>
+            </span>
+          </h2>
+          <p class="subtitle">Settings for the email server, to be used by the <code>PHPMailer</code> package.</p>
+
+          <div class="notification is-info is-light">
+            <p>
+              The mail-handling package will use SMTP as the email protocol.
+              Please note this.
+            </p>
+          </div>
+
+          <div class="field has-addons">
+            <div class="control">
+              <button class="button is-static" tabindex="-1">Email Server*</button>
+            </div>
+            <div class="control is-expanded">
+              <input class="input required" id="email-host" type="text" placeholder="mail.site.com">
+            </div>
+            <div class="control">
+              <button class="button is-static" tabindex="-1">Server Port*</button>
+            </div>
+            <div class="control">
+              <input class="input required" id="email-port" type="number" placeholder="465">
+            </div>
+          </div>
+
+          <div class="field has-addons">
+            <div class="control">
+              <button class="button is-static" tabindex="-1">Email Username*</button>
+            </div>
+            <div class="control is-expanded">
+              <input class="input required" id="email-username" type="text" placeholder="user@site.com">
+            </div>
+          </div>
+
+          <div class="field has-addons">
+            <div class="control">
+              <button class="button is-static" tabindex="-1">Email Password*</button>
+            </div>
+            <div class="control is-expanded">
+              <input class="input required" id="email-password" type="password" placeholder="The password to the user above">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="box">
+          <h2 class="title is-3">
+            <span class="icon-text">
+              <span class="icon">
+                <i class="mdi mdi-web"></i>
+              </span>
+              <span>Site Settings</span>
+            </span>
+          </h2>
+          <p class="subtitle">Settings about the site itself and its hosting.</p>
+
+          <div class="field has-addons">
+            <div class="control">
+              <button class="button is-static" tabindex="-1">Base URI*</button>
+            </div>
+            <div class="control is-expanded">
+              <input class="input required" id="site-baseuri" type="text" placeholder="https://site.com/">
             </div>
           </div>
         </div>

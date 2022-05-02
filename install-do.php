@@ -34,16 +34,21 @@ function runExec($query, $msg, $db) {
   }
 }
 
-$user_data["mysql_username"]  = $_GET["mysql_username"];
-$user_data["mysql_password"]  = $_GET["mysql_password"];
-$user_data["user_username"]   = $_GET["user_username"];
-$user_data["user_email"]      = $_GET["user_email"];
-$user_data["user_password"]   = $_GET["user_password"];
-$user_data["user_firstname"]  = $_GET["user_firstname"];
-$user_data["user_lastname"]   = $_GET["user_lastname"];
-$user_data["user_location"]   = $_GET["user_location"];
-$user_data["user_birth"]      = $_GET["user_birth"];
-$user_data["user_about"]      = $_GET["user_about"];
+$user_data["mysql_username"]   = $_GET["mysql_username"];
+$user_data["mysql_password"]   = $_GET["mysql_password"];
+$user_data["email_host"]       = $_GET["email_host"];
+$user_data["email_port"]       = $_GET["email_port"];
+$user_data["email_username"]   = $_GET["email_username"];
+$user_data["email_password"]   = $_GET["email_password"];
+$user_data["site_baseuri"]     = $_GET["site_baseuri"];
+$user_data["user_username"]    = $_GET["user_username"];
+$user_data["user_email"]       = $_GET["user_email"];
+$user_data["user_password"]    = $_GET["user_password"];
+$user_data["user_firstname"]   = $_GET["user_firstname"];
+$user_data["user_lastname"]    = $_GET["user_lastname"];
+$user_data["user_location"]    = $_GET["user_location"];
+$user_data["user_birth"]       = $_GET["user_birth"];
+$user_data["user_about"]       = $_GET["user_about"];
 
 $install = [];
 $step = 1;
@@ -583,7 +588,89 @@ $install[$step] = [
   "state" => "success"
 ];
 
+// Step 11 - Set PHPMailer data
+$step++;
+$admin_code = \Delight\Auth\Auth::createRandomString(64);
+$config_file = fopen( "scripts/config.php", "w" );
+$config = "<?php
+define(\"APP_MAIL_HOST\", \"{$user_data["email_host"]}\");
+define(\"APP_MAIL_PORT\", \"{$user_data["email_port"]}\");
+define(\"APP_MAIL_USERNAME\", \"{$user_data["email_username"]}\");
+define(\"APP_MAIL_PASSWORD\", \"{$user_data["email_password"]}\");
+define(\"SU_VALIDATION\", \"" . hash("sha3-512", $admin_code) . "\");
+define(\"SITE_BASEURI\", \"" . $user_data["site_baseuri"] . "\");";
+fwrite( $config_file, $config );
+fclose( $config_file );
 // Step 11 - Success
+$install[$step] = [
+  "title" => "Config File Created",
+  "msg" => "The installation script created the mailing configuration file successfully.",
+  "state" => "success"
+];
+
+// Step 12 - Send welcome email
+$step++;
+if ( is_readable( "scripts/config.php" ) ) {
+  include( "scripts/config.php" );
+  $mail = new \PHPMailer\PHPMailer\PHPMailer();
+  $mail->isSMTP();
+  $mail->Host       = constant("APP_MAIL_HOST");
+  $mail->SMTPAuth   = true;
+  $mail->Username   = constant("APP_MAIL_USERNAME");
+  $mail->Password   = constant("APP_MAIL_PASSWORD");
+  $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+  $mail->Port       = constant("APP_MAIL_PORT");
+  $mail->setFrom(constant("APP_MAIL_USERNAME"), constant("APP_NAME"));
+  $mail->addAddress($user_data["user_email"], "Admin");
+  $mail->isHTML(true);
+  $mail->Subject = "Installation Successful";
+  $mail->Body    = "<div>
+    <h2 style='font-family: monospace; font-size: 1.25rem; text-align: center; margin: 0 0 1rem 0;'>
+      The installation script for your distribution of " . constant("APP_NAME") . " (v" . constant("APP_VERSION") . ") finished successfully!
+    </h2>
+    <p style='font-family: monospace; margin: 0 0 1rem 0;'>
+      The installation of your own distribution of " . constant("APP_NAME") . " went on without problems.
+    </p>
+    <p style='font-family: monospace; margin: 0 0 1rem 0;'>
+      You are the <em>ADMIN</em> of this installation under the username <em>" . $user_data["user_username"] . "</em>.
+    </p>
+    <p style='font-family: monospace; margin: 0 0 1rem 0;'>
+      We hope you keep your password under secure storage. Should you forget it and/or loose it, you may <a href='" . constant("SITE_BASEURI") . "reset.php?code=" . urlencode($admin_code) . "'>reset it here</a>.
+      Keep this email secure and do <strong>not</strong> share this link with anyone.
+    </p>
+    <p style='font-family: monospace; font-size: 0.5rem; margin: 0; width: 100%; text-align: center;'>
+      " . constant("APP_NAME") . " &mdash; version " . constant("APP_VERSION") . "
+      <br>
+      <a href='" . constant("APP_REPO") . "'>Source</a> available under the <a href='" . constant("APP_LICENSE_URI") . "'>" . constant("APP_LICENSE_NAME") . "</a>
+    </p>
+  </div>";
+  $mail->AltBody = "The installation script for your distribution of " . constant("APP_NAME") . " (v" . constant("APP_VERSION") . ") finished successfully!
+  ---
+  The installation of your own distribution of " . constant("APP_NAME") . " went on without problems.
+  You are the &lt;ADMIN&gt; of this installation under the username &lt;" . $user_data["user_username"] . "&gt;.
+  We hope you keep your password under secure storage. Should you forget it and/or loose it, you may reset through this link: &lt;" . constant("SITE_BASEURI") . "reset.php?code=" . urlencode($admin_code) . "&gt;. Keep this email secure and do not share this link with anyone.
+  ---
+  " . constant("APP_NAME") . " - version " . constant("APP_VERSION") . "
+  Source available under the " . constant("APP_LICENSE_NAME");
+  $mail->send();
+  // Step 12 - Success
+  $install[$step] = [
+    "title" => "Installation Email Sent",
+    "msg" => "The installation script emailed the admin successfully.",
+    "state" => "success"
+  ];
+} else {
+  // Step 12 - Failure
+  $install[$step] = [
+    "title" => "Config File Error",
+    "msg" => "The mailing configuration file was unreachable.",
+    "state" => "danger"
+  ];
+  die( json_encode($install) );
+}
+
+// Step 13 - Success
+$step++;
 $install[$step] = [
   "title" => "Done",
   "msg" => "App installed. Now you may go to <a href=\".\">the main page</a> to start.",

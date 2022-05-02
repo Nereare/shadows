@@ -20,6 +20,11 @@ $(document).ready(function() {
     // Retrieve values for ease of use.
     var mysql_username = $("#mysql-username").val();
     var mysql_password = $("#mysql-password").val();
+    var email_host = $("#email-host").val();
+    var email_port = $("#email-port").val();
+    var email_username = $("#email-username").val();
+    var email_password = $("#email-password").val();
+    var site_baseuri = $("#site-baseuri").val();
     var user_username = $("#user-username").val();
     var user_email = $("#user-email").val();
     var user_password = $("#user-password").val();
@@ -50,6 +55,11 @@ $(document).ready(function() {
         data: {
           mysql_username: mysql_username,
           mysql_password: mysql_password,
+          email_host: email_host,
+          email_port: email_port,
+          email_username: email_username,
+          email_password: email_password,
+          site_baseuri: site_baseuri,
           user_username: user_username,
           user_email: user_email,
           user_password: user_password,
@@ -61,9 +71,7 @@ $(document).ready(function() {
         }
       })
         .done( function(r) {
-          console.log(reply);
           reply = JSON.parse(r);
-          console.log(reply);
         })
         .always( function(r) {
           // Empty the results div.

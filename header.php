@@ -10,6 +10,7 @@ try {
     'shadows'
   );
 } catch (\PDOException $e) { $notInstalled = true; }
+if ( !is_readable( "scripts/config.php" ) ) { $notInstalled = true; }
 
 if ( !isset($notInstalled) ) {
   $auth = new \Delight\Auth\Auth($db);

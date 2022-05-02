@@ -239,3 +239,5 @@ $RECYCLE.BIN/
 !.yarn/sdks
 !.yarn/versions
 vendor/
+scripts/config.php
+test.php
