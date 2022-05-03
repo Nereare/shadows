@@ -36,7 +36,7 @@ final class Profile {
 
       try {
         $stmt = $this->conn->prepare(
-          "SELECT `id` FROM `shadows`.`users`
+          "SELECT `id` FROM `users`
             WHERE `id` LIKE :uid"
         );
         $stmt->bindParam(":uid", $this->uid);
