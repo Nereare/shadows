@@ -5,6 +5,36 @@ $(document).ready(function() {
     spellChecker: false
   });
 
+  // Check required values - username
+  $("#user-username").on("input change", function() {
+    $(this).removeClass("is-success is-warning is-danger is-info");
+    if ( $(this).val().match(/^[A-Za-z][A-Za-z0-9_]{5,}$/) ) {
+      $(this).addClass("is-success");
+    } else {
+      $(this).addClass("is-warning");
+    }
+  });
+
+  // Check required values - email
+  $("#user-email").on("input change", function() {
+    $(this).removeClass("is-success is-warning is-danger is-info");
+    if ( $(this).val().match(/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/) ) {
+      $(this).addClass("is-success");
+    } else {
+      $(this).addClass("is-warning");
+    }
+  });
+
+  // Check required values - password
+  $("#user-password").on("input change", function() {
+    $(this).removeClass("is-success is-warning is-danger is-info");
+    if ( $(this).val().match(/^[A-Za-z0-9\_\-\?\$\(\)\#\@\.\=]{6,}$/) ) {
+      $(this).addClass("is-success");
+    } else {
+      $(this).addClass("is-warning");
+    }
+  });
+
   // Set required fields to show red if empty.
   $(".required").on("input change", function() {
     if ( $(this).val() == "" ) { $(this).addClass("is-danger"); }
@@ -34,7 +64,7 @@ $(document).ready(function() {
     var user_birth = $("#user-birth").val();
     var user_about = simplemde.value();
 
-    // Check required values.
+    // Check required values - if they have any contents.
     var req_filled = true;
     $(".required").each(function() {
       if ( $(this).val() == "" ) {

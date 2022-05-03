@@ -250,7 +250,8 @@ session_start();
             </span>
           </h3>
 
-          <p class="help">The username, once set, cannot be changed!</p>
+          <p class="help">The username, once set, cannot be changed! And it can contain only alphanumeric characters and underlines (<code>_</code>), it must start with a letter (<code>A-Z|a-z</code>), and have at least 6 characters.</p>
+          <p class="help">The password can contain alphanumeric characters as well as some special symbols (<code>_-?$()#@.=</code>), it also must be at least 6 character long.</p>
           <div class="field has-addons">
             <div class="control">
               <button class="button is-static" tabindex="-1">Admin Username*</button>
