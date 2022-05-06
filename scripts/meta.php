@@ -5,4 +5,4 @@ define("APP_YEAR", "2022");
 define("APP_REPO", "https://github.com/Nereare/shadows");
 define("APP_LICENSE_NAME", "Hippocratic License");
 define("APP_LICENSE_URI", "https://firstdonoharm.dev/");
-define("APP_VERSION", "0.5.1");
+define("APP_VERSION", "0.5.2");

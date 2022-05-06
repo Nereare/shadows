@@ -5,10 +5,12 @@ CREATE TABLE IF NOT EXISTS `rooms` (
   `adventure` INT UNSIGNED NOT NULL,
   `name` VARCHAR(63) DEFAULT NULL,
   `desc` TEXT DEFAULT NULL,
-  `has_items` BOOLEAN DEFAULT FALSE,
-  `has_checks` BOOLEAN DEFAULT FALSE,
-  `has_combats` BOOLEAN DEFAULT FALSE,
-  `has_exits` BOOLEAN DEFAULT FALSE,
+  `is_lit` BOOLEAN NOT NULL DEFAULT TRUE,
+  `has_items` BOOLEAN NOT NULL DEFAULT FALSE,
+  `has_checks` BOOLEAN NOT NULL DEFAULT FALSE,
+  `has_combats` BOOLEAN NOT NULL DEFAULT FALSE,
+  `has_npcs` BOOLEAN NOT NULL DEFAULT FALSE,
+  `has_exits` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`id`),
   KEY `adventure` (`adventure`),
   KEY `name` (`name`)
@@ -22,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `rooms_items` (
   `desc_hidden` TINYTEXT DEFAULT NULL,
   `investigation` TINYINT UNSIGNED DEFAULT NULL,
   `perception` TINYINT UNSIGNED DEFAULT NULL,
-  `is_taken` BOOLEAN NOT NULL DEFAULT FALSE,
+  `is_takable` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`id`),
   KEY `room` (`room`)
 );
@@ -50,6 +52,17 @@ CREATE TABLE IF NOT EXISTS `rooms_combats` (
   `stealth_dc` TINYINT UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `room` (`room`)
+);
+
+CREATE TABLE IF NOT EXISTS `rooms_npcs` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `npc` INT UNSIGNED NOT NULL,
+  `desc` TINYTEXT NOT NULL,
+  `gender` VARCHAR(24) NOT NULL,
+  `race` VARCHAR(24) NOT NULL,
+  `creature` INT UNSIGNED, # The ID of the creature stats for this NPC, if appliable. For now, unused. Possible future implementation. :)
+  PRIMARY KEY (`id`),
+  KEY `npc` (`npc`)
 );
 
 CREATE TABLE IF NOT EXISTS `rooms_exits` (
