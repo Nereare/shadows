@@ -54,7 +54,7 @@ if (
 
       <div class="field has-addons">
         <div class="control">
-          <button class="button is-static" tabIndex="-1">
+          <button class="button is-static" tabindex="-1">
             <span class="icon">
               <i class="mdi mdi-at"></i>
             </span>
@@ -68,7 +68,7 @@ if (
 
       <div class="field has-addons">
         <div class="control">
-          <button class="button is-static" tabIndex="-1">
+          <button class="button is-static" tabindex="-1">
             <span class="icon">
               <i class="mdi mdi-email"></i>
             </span>
