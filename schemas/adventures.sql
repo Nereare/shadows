@@ -2,6 +2,7 @@ USE `shadows`;
 
 CREATE TABLE IF NOT EXISTS `adventures` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uuid` CHAR(36) NOT NULL,
   `author` INT UNSIGNED NOT NULL,
   `name` VARCHAR(127) NOT NULL,
   `cover` VARCHAR(255) DEFAULT NULL,
@@ -15,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `adventures` (
   `is_public` BOOLEAN NOT NULL DEFAULT TRUE,
   `status` ENUM('development', 'alpha', 'beta', 'stable') NOT NULL DEFAULT 'development',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `uuid` (`uuid`),
   UNIQUE KEY `entry` (`entry`),
   KEY `author` (`author`)
 );
