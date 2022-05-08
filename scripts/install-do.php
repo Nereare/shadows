@@ -260,6 +260,7 @@ $tables = [
     "rooms",
     "CREATE TABLE IF NOT EXISTS `rooms` (
       `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+      `uuid` CHAR(36) NOT NULL,
       `adventure` INT UNSIGNED NOT NULL,
       `name` VARCHAR(63) DEFAULT NULL,
       `desc` TEXT DEFAULT NULL,
@@ -278,6 +279,7 @@ $tables = [
     "rooms_items",
     "CREATE TABLE IF NOT EXISTS `rooms_items` (
       `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+      `uuid` CHAR(36) NOT NULL,
       `room` INT UNSIGNED NOT NULL,
       `is_hidden` BOOLEAN NOT NULL DEFAULT FALSE,
       `desc_shown` TINYTEXT DEFAULT NULL,
@@ -293,6 +295,7 @@ $tables = [
     "rooms_checks",
     "CREATE TABLE IF NOT EXISTS `rooms_checks` (
       `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+      `uuid` CHAR(36) NOT NULL,
       `room` INT UNSIGNED NOT NULL,
       `skill` VARCHAR(31) NOT NULL,
       `dc` TINYINT UNSIGNED NOT NULL DEFAULT 15,
@@ -308,6 +311,7 @@ $tables = [
     "rooms_combats",
     "CREATE TABLE IF NOT EXISTS `rooms_combats` (
       `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+      `uuid` CHAR(36) NOT NULL,
       `room` INT UNSIGNED NOT NULL,
       `desc` TINYTEXT NOT NULL,
       `enemies` JSON NOT NULL,
@@ -322,6 +326,7 @@ $tables = [
     "rooms_npcs",
     "CREATE TABLE IF NOT EXISTS `rooms_npcs` (
       `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+      `uuid` CHAR(36) NOT NULL,
       `npc` INT UNSIGNED NOT NULL,
       `desc` TINYTEXT NOT NULL,
       `gender` VARCHAR(24) NOT NULL,
@@ -335,6 +340,7 @@ $tables = [
     "rooms_exits",
     "CREATE TABLE IF NOT EXISTS `rooms_exits` (
       `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+      `uuid` CHAR(36) NOT NULL,
       `room` INT UNSIGNED NOT NULL,
       `desc` TINYTEXT NOT NULL,
       `exit` INT UNSIGNED NOT NULL,
