@@ -14,7 +14,7 @@ $page = "settings";
 require_once "header.php";
 
 if ( $auth->isLoggedIn() ) {
-  $profile  = new Nereare\Profile\Profile($db, $auth->getUserId());
+  $profile  = new Nereare\Shadows\Profile($db, $auth->getUserId());
   $data     = $profile->fetch();
 ?>
 

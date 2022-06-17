@@ -38,7 +38,7 @@ switch ( $action ) {
           $password,
           $_GET["username"],
         );
-        $profile = new \Nereare\Profile\Profile($db, $uid);
+        $profile = new Nereare\Shadows\Profile($db, $uid);
         $profile->create("", "", "", "", "");
         $mail->addAddress($_GET["email"], "New User");
         $mail->Subject = "User created";
@@ -118,7 +118,7 @@ switch ( $action ) {
     if ( isset($_GET["uid"]) ) {
       try {
         $password = \Delight\Auth\Auth::createRandomString(12);
-        $profile = new \Nereare\Profile\Profile($db, $_GET["uid"]);
+        $profile = new Nereare\Shadows\Profile($db, $_GET["uid"]);
         $email = $profile->getEmail();
         $auth->admin()->changePasswordForUserById($_GET["uid"], $password);
 

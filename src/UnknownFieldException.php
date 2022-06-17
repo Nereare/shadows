@@ -1,6 +1,6 @@
 <?php
-namespace Nereare\Profile;
+namespace Nereare\Shadows;
 
-use Nereare\Profile\ProfileException;
+use Nereare\Shadows\ProfileException;
 
 class UnknownFieldException extends ProfileException {}

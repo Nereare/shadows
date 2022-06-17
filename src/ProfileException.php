@@ -1,4 +1,4 @@
 <?php
-namespace Nereare\Profile;
+namespace Nereare\Shadows;
 
 class ProfileException extends \Exception {}

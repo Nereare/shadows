@@ -568,7 +568,7 @@ $install[$step] = [
 try {
   // Step 9: Start admin's profile
   $step++;
-  $profile = new \Nereare\Profile\Profile($db, $uid);
+  $profile = new Nereare\Shadows\Profile($db, $uid);
 } catch (\Exception $e) {
   // Step 9 - Error
   $install[$step] = [

@@ -1,7 +1,7 @@
 {
   "autoload": {
     "psr-4": {
-      "Nereare\\Profile\\": "src/"
+      "Nereare\\Shadows\\": "src/"
     }
   },
   "require": {

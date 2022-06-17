@@ -11,7 +11,7 @@ if ( $auth->isLoggedIn() ) {
   if ( isset( $_GET["uid"] ) ) { $uid = $_GET["uid"]; }
   else { $uid = $auth->getUserId(); }
 
-  $profile  = new Nereare\Profile\Profile($db, $uid);
+  $profile  = new Nereare\Shadows\Profile($db, $uid);
   $data     = $profile->fetch();
   $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $data["email"] ) ) ) . "?d=retro&s=128";
 ?>

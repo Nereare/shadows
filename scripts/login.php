@@ -40,7 +40,7 @@ switch ( $_GET["do"] ) {
     break;
   case "update":
     try {
-      $profile = new \Nereare\Profile\Profile(
+      $profile = new Nereare\Shadows\Profile(
         $db,
         $_GET["uid"]
       );
@@ -52,9 +52,9 @@ switch ( $_GET["do"] ) {
         $_GET["about"]
       );
     }
-    catch (\Nereare\Profile\NoUidException $e) { die("401"); }
-    catch (\Nereare\Profile\ProfileException $e) { die("500"); }
-    catch (\Nereare\Profile\InvalidUidException $e) { die("401"); }
+    catch (Nereare\Shadows\NoUidException $e) { die("401"); }
+    catch (Nereare\Shadows\ProfileException $e) { die("500"); }
+    catch (Nereare\Shadows\InvalidUidException $e) { die("401"); }
     catch (\Exception $e) { die("418"); }
     echo "0";
     break;
