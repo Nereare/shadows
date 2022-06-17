@@ -187,7 +187,7 @@ if ( !isset($page) ) { $page = null; }
             </span>
             <span>Play</span>
           </a>
-          <a class="navbar-item<?php echo ($page == "create") ? " is-active" : ""; ?>" href="create.php">
+          <a class="navbar-item<?php echo ($page == "create") ? " is-active" : ""; ?>" href="create.php?do=adventure">
             <span class="icon">
               <i class="mdi mdi-pencil"></i>
             </span>
