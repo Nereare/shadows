@@ -1,4 +1,3 @@
-
 <?php
 require_once "header.php";
 
@@ -13,66 +12,24 @@ if ( $auth->isLoggedIn() ) {
       <div class="column is-3">
         <nav class="panel">
           <p class="panel-heading">
-            Repositories
+            My Stories
           </p>
+          <!-- TODO: List stories from this user. -->
+          <?php if (true) { ?>
           <div class="panel-block">
-            <p class="control has-icons-left">
-              <input class="input" type="text" placeholder="Search">
-              <span class="icon is-left">
-                <i class="mdi mdi-search" aria-hidden="true"></i>
-              </span>
-            </p>
-          </div>
-          <p class="panel-tabs">
-            <a class="is-active">All</a>
-            <a>Public</a>
-            <a>Private</a>
-          </p>
-          <a class="panel-block is-active">
             <span class="panel-icon">
-              <i class="mdi mdi-source-repository" aria-hidden="true"></i>
+              <i class="mdi mdi-dots-horizontal" aria-hidden="true"></i>
+            </span>
+            No story found
+          </div>
+          <?php } else { ?>
+          <a class="panel-block" href="#">
+            <span class="panel-icon">
+              <i class="mdi mdi-clipboard-text" aria-hidden="true"></i>
             </span>
             bulma
           </a>
-          <a class="panel-block">
-            <span class="panel-icon">
-              <i class="mdi mdi-source-repository" aria-hidden="true"></i>
-            </span>
-            marksheet
-          </a>
-          <a class="panel-block">
-            <span class="panel-icon">
-              <i class="mdi mdi-source-repository" aria-hidden="true"></i>
-            </span>
-            minireset.css
-          </a>
-          <a class="panel-block">
-            <span class="panel-icon">
-              <i class="mdi mdi-source-repository" aria-hidden="true"></i>
-            </span>
-            jgthms.github.io
-          </a>
-          <a class="panel-block">
-            <span class="panel-icon">
-              <i class="mdi mdi-source-branch" aria-hidden="true"></i>
-            </span>
-            daniellowtw/infboard
-          </a>
-          <a class="panel-block">
-            <span class="panel-icon">
-              <i class="mdi mdi-source-branch" aria-hidden="true"></i>
-            </span>
-            mojs
-          </a>
-          <label class="panel-block">
-            <input type="checkbox">
-            remember me
-          </label>
-          <div class="panel-block">
-            <button class="button is-link is-outlined is-fullwidth">
-              Reset all filters
-            </button>
-          </div>
+          <?php } ?>
         </nav>
       </div>
       <!-- /Panel -->
@@ -81,10 +38,10 @@ if ( $auth->isLoggedIn() ) {
       <div class="column">
         <div class="box">
           <div class="content">
-            <p>Foo</p>
+            <h2 class="title is-4">Foo</h2>
             <?php
-            $prof = new \Nereare\Profile\Profile($db, 1);
-            var_dump( $prof->get("birth") );
+            $adv = new Nereare\Shadows\Adventure($db, 4);
+            var_dump( $adv );
             ?>
 
             <div class="field">
