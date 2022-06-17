@@ -34,6 +34,8 @@ final class Profile {
     else {
       $this->uid = (int)$uid;
 
+      // This statement fetching is meant to only check if the given UID
+      // corresponds to an existing user.
       try {
         $stmt = $this->conn->prepare(
           "SELECT `id` FROM `users`
