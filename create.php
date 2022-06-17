@@ -45,7 +45,7 @@ if ( $auth->isLoggedIn() ) {
           </button>
         </div>
         <div class="control is-expanded">
-          <input type="text" class="input" id="name" placeholder="Name of the adventure" autofocus>
+          <input type="text" class="input" id="name" placeholder="Name of the adventure" required autofocus>
         </div>
       </div>
 
@@ -97,7 +97,7 @@ if ( $auth->isLoggedIn() ) {
             </div>
 
             <div class="control is-expanded">
-              <input type="number" class="input" id="level-start" placeholder="Initial party level" min="1" max="20" step="1">
+              <input type="number" class="input" id="level-start" placeholder="Initial party level" min="1" max="20" step="1" required>
             </div>
           </div>
 
@@ -115,7 +115,7 @@ if ( $auth->isLoggedIn() ) {
 
             <div class="control is-expanded">
               <div class="select is-fullwidth">
-                <select id="is-public">
+                <select id="is-public" required>
                   <option value="true" selected>Public</option>
                   <option value="false">Private</option>
                 </select>
@@ -138,7 +138,7 @@ if ( $auth->isLoggedIn() ) {
             </div>
 
             <div class="control is-expanded">
-              <input type="number" class="input" id="pcs" placeholder="Number of PCs" min="1" step="1">
+              <input type="number" class="input" id="pcs" placeholder="Number of PCs" min="1" step="1" required>
             </div>
           </div>
 
@@ -155,7 +155,7 @@ if ( $auth->isLoggedIn() ) {
             </div>
 
             <div class="control is-expanded">
-              <input type="number" class="input" id="level-end" placeholder="Expected final party level" min="1" max="20" step="1">
+              <input type="number" class="input" id="level-end" placeholder="Expected final party level" min="1" max="20" step="1" required>
             </div>
           </div>
 
@@ -173,8 +173,8 @@ if ( $auth->isLoggedIn() ) {
 
             <div class="control is-expanded">
               <div class="select is-fullwidth">
-                <select id="is-public">
-                  <option value="development">Development</option>
+                <select id="dev-status" required>
+                  <option value="development" selected>Development</option>
                   <option value="alpha">Alpha Test</option>
                   <option value="beta">Beta Test</option>
                   <option value="stable">Stable</option>
@@ -193,7 +193,7 @@ if ( $auth->isLoggedIn() ) {
 
       <div class="field">
         <div class="control">
-          <textarea class="textarea has-fixed-size" id="description" placeholder="Enter the description of your campaign here"></textarea>
+          <textarea class="textarea has-fixed-size" id="description" placeholder="Enter the description of your campaign here" required></textarea>
         </div>
       </div>
 
@@ -206,7 +206,7 @@ if ( $auth->isLoggedIn() ) {
       <?php
           break;
         default:
-          // code...
+          // Code for room creation here
           break;
       }
       ?>
