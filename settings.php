@@ -202,7 +202,7 @@ if ( $auth->isLoggedIn() ) {
             element: $("#profile-about")[0],
             spellChecker: false
           });
-          simplemde.value("<?php echo $profile->get("about"); ?>");
+          simplemde.value("<?php echo str_replace("\"", "\\\"", $profile->get("about")); ?>");
           </script>
         </div>
       </div>
