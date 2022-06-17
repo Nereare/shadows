@@ -9,7 +9,7 @@ use Nereare\Shadows\UnknownUidException;
 
 final class Profile {
 
-  const FIELDS = ["first_name", "last_name", "location", "birth", "about"];
+  private const FIELDS = ["first_name", "last_name", "location", "birth", "about"];
 
   private $conn;
   private $uid;
