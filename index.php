@@ -7,7 +7,7 @@ if ( $auth->isLoggedIn() ) {
 
 <section class="section">
   <div class="container">
-    <div class="columns">
+    <div class="columns mb-0">
 
       <!-- Panel -->
       <div class="column is-3">

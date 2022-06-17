@@ -65,7 +65,7 @@ if ( $auth->isLoggedIn() ) {
         </div>
       </div>
 
-      <div class="columns">
+      <div class="columns mb-0">
         <div class="column">
           <div class="field has-addons">
             <div class="control">

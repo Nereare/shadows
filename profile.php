@@ -43,7 +43,7 @@ if ( $auth->isLoggedIn() ) {
           </div>
         </div>
 
-        <div class="columns">
+        <div class="columns mb-0">
           <div class="column has-text-centered">
             <p class="title is-6">
               <span class="icon-text has-text-primary">
