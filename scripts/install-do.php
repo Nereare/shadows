@@ -218,7 +218,7 @@ $tables = [
       `pcs` TINYINT UNSIGNED NOT NULL DEFAULT 1,
       `is_public` BOOLEAN NOT NULL DEFAULT TRUE,
       `status` ENUM('development', 'alpha', 'beta', 'stable') NOT NULL DEFAULT 'development',
-      `entry` INT UNSIGNED NOT NULL,
+      `entry` CHAR(36),
       PRIMARY KEY (`id`),
       UNIQUE KEY `uuid` (`uuid`),
       UNIQUE KEY `entry` (`entry`),
