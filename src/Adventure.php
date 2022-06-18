@@ -11,8 +11,8 @@ use Nereare\Shadows\UnknownAidException;
 
 final class Adventure {
 
-  private const CHANGEABLE_FIELDS   = ["name", "cover", "desc", "setting", "triggers", "level_init", "level_end", "pcs", "is_public", "status", "entry"];
-  private const NEEDED_CREATE_KEYS  = ["author", "name", "cover", "desc", "setting", "triggers", "level_init", "level_end", "pcs", "is_public", "status"];
+  private const CHANGEABLE_FIELDS   = ["name", "cover", "version", "desc", "setting", "triggers", "level_init", "level_end", "pcs", "is_public", "status", "advancement", "entry"];
+  private const NEEDED_CREATE_KEYS  = ["author", "name", "cover", "version", "desc", "setting", "triggers", "level_init", "level_end", "pcs", "is_public", "status", "advancement"];
 
   private $conn;
 
@@ -22,6 +22,7 @@ final class Adventure {
   private $auth_name;   // VARCHAR(127) - Author (User) Name
   private $name;        // VARCHAR(127)
   private $cover;       // VARCHAR(255)
+  private $version      // VARCHAR(32)
   private $desc;        // TEXT
   private $setting;     // VARCHAR(63)
   private $triggers;    // VARCHAR(1023)
@@ -29,7 +30,8 @@ final class Adventure {
   private $level_end;   // TINYINT UNSIGNED
   private $pcs;         // TINYINT UNSIGNED
   private $is_public;   // BOOLEAN
-  private $status;      // ENUM
+  private $status;      // ENUM('development', 'alpha', 'beta', 'stable')
+  private $advancement  // ENUM('xp', 'milestone', 'other')
   private $entry;       // INT UNSIGNED
 
   /**
@@ -67,6 +69,7 @@ final class Adventure {
         $this->auth_name   = $adv["first_name"] . " " . $adv["last_name"];
         $this->name        = $adv["name"];
         $this->cover       = $adv["cover"];
+        $this->version     = $adv["version"];
         $this->desc        = $adv["desc"];
         $this->setting     = $adv["setting"];
         $this->triggers    = $adv["triggers"];
@@ -75,6 +78,7 @@ final class Adventure {
         $this->pcs         = $adv["pcs"];
         $this->is_public   = $adv["is_public"];
         $this->status      = $adv["status"];
+        $this->advancement = $adv["advancement"];
         $this->entry       = $adv["entry"];
       } else {
         throw new Nereare\Shadows\UnknownAdventureFieldException("Invalid adventure data array.");
@@ -89,6 +93,7 @@ final class Adventure {
       $this->auth_name   = $adv["first_name"] . " " . $adv["last_name"];
       $this->name        = $adv["name"];
       $this->cover       = $adv["cover"];
+      $this->version     = $adv["version"];
       $this->desc        = $adv["desc"];
       $this->setting     = $adv["setting"];
       $this->triggers    = $adv["triggers"];
@@ -97,6 +102,7 @@ final class Adventure {
       $this->pcs         = $adv["pcs"];
       $this->is_public   = $adv["is_public"];
       $this->status      = $adv["status"];
+      $this->advancement = $adv["advancement"];
       $this->entry       = $adv["entry"];
     }
   }
@@ -146,6 +152,13 @@ final class Adventure {
    * @return string   The adventure's cover URI.
    */
   public function getCoverURI() { return $this->cover; }
+
+  /**
+   * Returns the version of the current adventure.
+   *
+   * @return string   The adventure's version.
+   */
+  public function getVersion() { return $this->version; }
 
   /**
    * Returns the description of the current adventure.
@@ -204,6 +217,13 @@ final class Adventure {
   public function getDevStatus() { return $this->status; }
 
   /**
+   * Returns the advancement method of the current adventure.
+   *
+   * @return string   The adventure's advancement method.
+   */
+  public function getAdvancement() { return $this->advancement; }
+
+  /**
    * Returns the entry room ID of the current adventure.
    *
    * @return int   The adventure's entry room ID.
@@ -231,6 +251,15 @@ final class Adventure {
    * @return void
    */
   public function setCoverURI($newval) { $this->cover = setVal("cover", $newval); }
+
+  /**
+   * Sets the version of the current adventure to the new value.
+   *
+   * @param  string  $newval   The adventure's new version.
+   *
+   * @return void
+   */
+  public function setVersion($newval) { $this->version = setVal("version", $newval); }
 
   /**
    * Sets the description of the current adventure to the new value.
@@ -305,6 +334,15 @@ final class Adventure {
   public function setDevStatus($newval) { $this->status = setVal("status", $newval); }
 
   /**
+   * Sets the advancement method of the current adventure to the new value.
+   *
+   * @param  string  $newval   The adventure's new advancement method.
+   *
+   * @return void
+   */
+  public function setAdvancement($newval) { $this->advancement = setVal("advancement", $newval); }
+
+  /**
    * Sets the entry room ID of the current adventure to the new value.
    *
    * @param  int  $newval   The adventure's new entry room ID.
@@ -334,13 +372,14 @@ final class Adventure {
       // Prepare the insert query
       $stmt = $this->conn->prepare(
         "INSERT INTO `shadows`.`adventures`
-          (`uuid`, `author`, `name`, `cover`, `desc`, `setting`, `triggers`, `level_init`, `level_end`, `pcs`, `is_public`, `status`, `entry`)
-          VALUES (:uuid, :author, :name, :cover, :description, :setting, :triggers, :level_init, :level_end, :pcs, :is_public, :status, :entry)"
+          (`uuid`, `author`, `name`, `cover`, `version`, `desc`, `setting`, `triggers`, `level_init`, `level_end`, `pcs`, `is_public`, `status`, `advancement`, `entry`)
+          VALUES (:uuid, :author, :name, :cover, :version, :description, :setting, :triggers, :level_init, :level_end, :pcs, :is_public, :status, :advancement, :entry)"
       );
       $stmt->bindParam( ":uuid", $data["uuid"] );
       $stmt->bindParam( ":author", $data["author"] );
       $stmt->bindParam( ":name", $data["name"] );
       $stmt->bindParam( ":cover", $data["cover"] );
+      $stmt->bindParam( ":version", $data["version"] );
       $stmt->bindParam( ":description", $data["desc"] );
       $stmt->bindParam( ":setting", $data["setting"] );
       $stmt->bindParam( ":triggers", $data["triggers"] );
@@ -349,6 +388,7 @@ final class Adventure {
       $stmt->bindParam( ":pcs", $data["pcs"] );
       $stmt->bindParam( ":is_public", $data["is_public"] );
       $stmt->bindParam( ":status", $data["status"] );
+      $stmt->bindParam( ":advancement", $data["advancement"] );
       $stmt->bindParam( ":entry", $data["entry"] );
       $result = $stmt->execute();
       // Get inserted row ID
@@ -391,7 +431,7 @@ final class Adventure {
       try {
         $stmt = $this->conn->prepare(
           "SELECT
-            `adventures`.`uuid`, `adventures`.`author`, `adventures`.`name`, `adventures`.`cover`, `adventures`.`desc`, `adventures`.`setting`, `adventures`.`triggers`, `adventures`.`level_init`, `adventures`.`level_end`, `adventures`.`pcs`, `adventures`.`is_public`, `adventures`.`status`, `adventures`.`entry`, `users_profiles`.`first_name`, `users_profiles`.`last_name`
+            `adventures`.`uuid`, `adventures`.`author`, `adventures`.`name`, `adventures`.`cover`, `adventures`.`version`, `adventures`.`desc`, `adventures`.`setting`, `adventures`.`triggers`, `adventures`.`level_init`, `adventures`.`level_end`, `adventures`.`pcs`, `adventures`.`is_public`, `adventures`.`status`, `adventures`.`advancement`, `adventures`.`entry`, `users_profiles`.`first_name`, `users_profiles`.`last_name`
             FROM `adventures`, `users_profiles`
             WHERE
               `adventures`.`author` = `users_profiles`.`id` AND
@@ -418,7 +458,7 @@ final class Adventure {
           WHERE `id` LIKE :aid"
       );
       $stmt->bindParam(":value", $newval);
-      $stmt->bindParam(":uid", $aid);
+      $stmt->bindParam(":uid", $this->aid);
       $stmt->execute();
       $result = $stmt->rowCount();
       return $result ? true : false;
