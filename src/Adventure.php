@@ -22,7 +22,7 @@ final class Adventure {
   private $auth_name;   // VARCHAR(127) - Author (User) Name
   private $name;        // VARCHAR(127)
   private $cover;       // VARCHAR(255)
-  private $version      // VARCHAR(32)
+  private $version;     // VARCHAR(32)
   private $desc;        // TEXT
   private $setting;     // VARCHAR(63)
   private $triggers;    // VARCHAR(1023)
@@ -31,7 +31,7 @@ final class Adventure {
   private $pcs;         // TINYINT UNSIGNED
   private $is_public;   // BOOLEAN
   private $status;      // ENUM('development', 'alpha', 'beta', 'stable')
-  private $advancement  // ENUM('xp', 'milestone', 'other')
+  private $advancement; // ENUM('xp', 'milestone', 'other')
   private $entry;       // INT UNSIGNED
 
   /**
