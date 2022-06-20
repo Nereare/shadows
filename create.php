@@ -14,7 +14,7 @@ $page = "create";
 require_once "header.php";
 
 if ( $auth->isLoggedIn() ) {
-  if ( !isset($_GET["do"]) ) { $_GET["do"] = "adventure"; }
+  if ( !isset($_GET["do"]) ) { $_GET["do"] = "room"; }
 ?>
 
 <main class="section">
@@ -106,16 +106,31 @@ if ( $auth->isLoggedIn() ) {
               <button class="button is-static" tabindex="-1">
                 <span class="icon-text">
                   <span class="icon">
+                    <i class="mdi mdi-counter"></i>
+                  </span>
+                  <span>Version</span>
+              </button>
+            </div>
+            <div class="control is-expanded">
+              <input type="text" class="input" id="version" placeholder="Version">
+            </div>
+          </div>
+
+          <div class="field has-addons">
+            <div class="control">
+              <button class="button is-static" tabindex="-1">
+                <span class="icon-text">
+                  <span class="icon">
                     <i class="mdi mdi-eye"></i>
                   </span>
-                  <span>Visibility</sub></span>
+                  <span>Visibility</span>
                 </span>
               </button>
             </div>
 
             <div class="control is-expanded">
               <div class="select is-fullwidth">
-                <select id="is-public" required>
+                <select id="is-public">
                   <option value="true" selected>Public</option>
                   <option value="false">Private</option>
                 </select>
@@ -164,6 +179,29 @@ if ( $auth->isLoggedIn() ) {
               <button class="button is-static" tabindex="-1">
                 <span class="icon-text">
                   <span class="icon">
+                    <i class="mdi mdi-glass-stange"></i>
+                  </span>
+                  <span>Advancement</sub></span>
+                </span>
+              </button>
+            </div>
+
+            <div class="control is-expanded">
+              <div class="select is-fullwidth">
+                <select id="advancement">
+                  <option value="milestone" selected>Milestone</option>
+                  <option value="xp">XP</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field has-addons">
+            <div class="control">
+              <button class="button is-static" tabindex="-1">
+                <span class="icon-text">
+                  <span class="icon">
                     <i class="mdi mdi-ab-testing"></i>
                   </span>
                   <span>Dev. Status</sub></span>
@@ -173,7 +211,7 @@ if ( $auth->isLoggedIn() ) {
 
             <div class="control is-expanded">
               <div class="select is-fullwidth">
-                <select id="dev-status" required>
+                <select id="dev-status">
                   <option value="development" selected>Development</option>
                   <option value="alpha">Alpha Test</option>
                   <option value="beta">Beta Test</option>
@@ -193,7 +231,7 @@ if ( $auth->isLoggedIn() ) {
 
       <div class="field">
         <div class="control">
-          <textarea class="textarea has-fixed-size" id="description" placeholder="Enter the description of your campaign here" required></textarea>
+          <textarea class="textarea has-fixed-size" id="description" placeholder="Enter the description of your campaign here"></textarea>
         </div>
       </div>
 
@@ -210,6 +248,11 @@ if ( $auth->isLoggedIn() ) {
           break;
       }
       ?>
+
+      <div class="notification is-hidden" id="create-notification">
+        <p></p>
+      </div>
+
     </div>
   </div>
 </main>

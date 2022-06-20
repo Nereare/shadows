@@ -2,6 +2,22 @@
 require_once "header.php";
 
 if ( $auth->isLoggedIn() ) {
+  // Get User ID
+  $uid = $auth->getUserId();
+
+  // Retrieve adventures from the user
+  try {
+    $stmt = $db->prepare(
+      "SELECT
+        `id`, `uuid`, `name`, `author`, `is_public`
+        FROM `adventures`
+        WHERE `author` = :uid
+        ORDER BY `name`"
+    );
+    $stmt->bindParam(":uid", $uid);
+    $stmt->execute();
+    $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  } catch(\PDOException $e) { $result = []; }
 ?>
 
 <section class="section">
@@ -14,21 +30,20 @@ if ( $auth->isLoggedIn() ) {
           <p class="panel-heading">
             My Stories
           </p>
-          <!-- TODO: List stories from this user. -->
-          <?php if (true) { ?>
+          <?php if ( $result ) { foreach ($result as $index => $adv) { ?>
+          <a class="panel-block" href="adventure.php?aid=<?php echo $adv["id"]; ?>">
+            <span class="panel-icon">
+              <i class="mdi mdi-<?php echo ($adv["is_public"]) ? "eye" : "eye-off"; ?>" aria-hidden="true"></i>
+            </span>
+            <?php echo $adv["name"]; ?>
+          </a>
+          <?php } } else { ?>
           <div class="panel-block">
             <span class="panel-icon">
               <i class="mdi mdi-dots-horizontal" aria-hidden="true"></i>
             </span>
             No story found
           </div>
-          <?php } else { ?>
-          <a class="panel-block" href="#">
-            <span class="panel-icon">
-              <i class="mdi mdi-clipboard-text" aria-hidden="true"></i>
-            </span>
-            bulma
-          </a>
           <?php } ?>
         </nav>
       </div>

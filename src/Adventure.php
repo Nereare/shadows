@@ -12,7 +12,7 @@ use Nereare\Shadows\UnknownAidException;
 final class Adventure {
 
   private const CHANGEABLE_FIELDS   = ["name", "cover", "version", "desc", "setting", "triggers", "level_init", "level_end", "pcs", "is_public", "status", "advancement", "entry"];
-  private const NEEDED_CREATE_KEYS  = ["author", "name", "cover", "version", "desc", "setting", "triggers", "level_init", "level_end", "pcs", "is_public", "status", "advancement"];
+  private const NEEDED_CREATE_KEYS  = ["advancement", "author", "cover", "desc", "is_public", "level_end", "level_init", "name", "pcs", "setting", "status", "triggers", "version"];
 
   private $conn;
 
@@ -55,11 +55,14 @@ final class Adventure {
   public function __construct($databaseConn, $aid = null, $data = null) {
     $this->conn = $databaseConn;
     if ( $aid == null ) {
+      // Sort the adventure data array indexes:
+      $adv_keys = array_keys( $data );
+      sort( $adv_keys );
       // Check if given data:
       //   1. Is an array; and
       //   2. Has the required fields.
       if (gettype( $data ) == "array" &&
-          array_keys( $data ) == $this::NEEDED_CREATE_KEYS) {
+          $adv_keys == $this::NEEDED_CREATE_KEYS) {
         // Create a database entry for the given Adventure data
         $adv = $this->create($data);
         // Use the data to fill the Adventure object data
