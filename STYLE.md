@@ -115,7 +115,7 @@ Variable names MUST comply to all-lower-case `snake_case`.
 Constant name MUST comply to all-upper-case `SCREAMING_SNAKE_CASE`.
 
 #### 0.1.5. Index Names
-When indexes are not numeric, they MUST comply to all-lower-case `kebab-case`.
+When indexes are not numeric, they MUST comply to all-lower-case `snake_case`.
 
 ### 0.2. Filenames
 Filenames, except as noted below, MUST comply to all-lower-case `kebab-case`.
