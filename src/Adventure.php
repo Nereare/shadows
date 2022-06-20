@@ -140,7 +140,7 @@ final class Adventure {
    *
    * @return int   The adventure's author name.
    */
-  public function getAuthorName() { return $this->auth_namer; }
+  public function getAuthorName() { return $this->auth_name; }
 
   /**
    * Returns the name of the current adventure.
