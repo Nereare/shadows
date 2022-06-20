@@ -84,7 +84,7 @@ final class Adventure {
         $this->advancement = $adv["advancement"];
         $this->entry       = $adv["entry"];
       } else {
-        throw new Nereare\Shadows\UnknownAdventureFieldException("Invalid adventure data array.");
+        throw new \Nereare\Shadows\UnknownAdventureFieldException("Invalid adventure data array.");
       }
     } else {
       // Get data from database, based on the given Adventure ID
@@ -397,7 +397,7 @@ final class Adventure {
       // Get inserted row ID
       $data["aid"] = $this->conn->lastInsertId();
       // If there was some error in the PDO execution, throw an error
-      if ( !$result ) { throw new Nereare\Shadows\AdventureException("Database query failed."); }
+      if ( !$result ) { throw new \Nereare\Shadows\AdventureException("Database query failed."); }
 
       // Prepare method to fetch author's name
       $stmt = $this->conn->prepare(
@@ -409,13 +409,13 @@ final class Adventure {
       $stmt->execute();
       $result = $stmt->fetch(\PDO::FETCH_ASSOC);
       // If there was some error in the PDO execution, throw an error
-      if ( !$result ) { throw new Nereare\Shadows\AdventureException("Database query failed."); }
+      if ( !$result ) { throw new \Nereare\Shadows\AdventureException("Database query failed."); }
       // Set author name in the result array
       $data["first_name"] = $result["first_name"];
       $data["last_name"] = $result["last_name"];
 
       return $data;
-    } catch(\PDOException $e) { throw new Nereare\Shadows\AdventureException("Database execution error."); }
+    } catch(\PDOException $e) { throw new \Nereare\Shadows\AdventureException("Database execution error."); }
   }
 
   /**
@@ -429,7 +429,7 @@ final class Adventure {
    */
   private function fetch() {
     if ( $this->aid == null ) {
-      throw new Nereare\Shadows\NoAidException("No Adventure ID set.");
+      throw new \Nereare\Shadows\NoAidException("No Adventure ID set.");
     } else {
       try {
         $stmt = $this->conn->prepare(
@@ -443,15 +443,15 @@ final class Adventure {
         $stmt->bindParam(":aid", $this->aid);
         $stmt->execute();
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-        if ( !$result ) { throw new Nereare\Shadows\InvalidAidException("Adventure ID is invalid."); }
+        if ( !$result ) { throw new \Nereare\Shadows\InvalidAidException("Adventure ID is invalid."); }
         return $result;
-      } catch(\PDOException $e) { throw new Nereare\Shadows\AdventureException("Database execution error."); }
+      } catch(\PDOException $e) { throw new \Nereare\Shadows\AdventureException("Database execution error."); }
     }
   }
 
   private function setVal($field, $newval) {
     if ( !in_array( $field, $this::CHANGEABLE_FIELDS ) ) {
-      throw new Nereare\Shadows\UnknownAdventureFieldException("No such field.");
+      throw new \Nereare\Shadows\UnknownAdventureFieldException("No such field.");
     }
 
     try {
@@ -465,7 +465,7 @@ final class Adventure {
       $stmt->execute();
       $result = $stmt->rowCount();
       return $result ? true : false;
-    } catch(\PDOException $e) { throw new Nereare\Shadows\AdventureException("Database execution error."); }
+    } catch(\PDOException $e) { throw new \Nereare\Shadows\AdventureException("Database execution error."); }
   }
 
 }
