@@ -61,7 +61,7 @@ if ( $auth->isLoggedIn() ) {
           </button>
         </div>
         <div class="control is-expanded">
-          <input type="text" class="input" id="cover" placeholder="URI to cover image">
+          <input type="text" class="input" id="cover" placeholder="URI to cover image (preferably 1280x430px)">
         </div>
       </div>
 

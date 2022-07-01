@@ -20,7 +20,8 @@ CREATE TABLE IF NOT EXISTS `rooms` (
 CREATE TABLE IF NOT EXISTS `rooms_items` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `uuid` CHAR(36) NOT NULL,
-  `room` INT UNSIGNED NOT NULL,
+  `container` CHAR(36) NOT NULL,
+  `condition` ENUM('success', 'failure') NOT NULL DEFAULT 'success',
   `is_hidden` BOOLEAN NOT NULL DEFAULT FALSE,
   `desc_shown` TINYTEXT DEFAULT NULL,
   `desc_hidden` TINYTEXT DEFAULT NULL,
@@ -35,12 +36,16 @@ CREATE TABLE IF NOT EXISTS `rooms_checks` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `uuid` CHAR(36) NOT NULL,
   `room` INT UNSIGNED NOT NULL,
-  `skill` VARCHAR(31) NOT NULL,
+  `skill` VARCHAR(31) NOT NULL
   `dc` TINYINT UNSIGNED NOT NULL DEFAULT 15,
   `critical_failure` TEXT, # Result if roll was 5+ below DC.
   `normal_failure` TEXT, # Result if roll was below DC.
   `normal_success` TEXT, # Result if roll was equal-to-or-above DC.
   `critical_success` TEXT, # Result if roll was 5+ above DC.
+  `has_items` BOOLEAN NOT NULL DEFAULT FALSE,
+  `has_exits` BOOLEAN NOT NULL DEFAULT FALSE,
+  `has_combats_failure` BOOLEAN NOT NULL DEFAULT FALSE,
+  `has_combats_success` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`id`),
   KEY `room` (`room`)
 );
@@ -48,7 +53,8 @@ CREATE TABLE IF NOT EXISTS `rooms_checks` (
 CREATE TABLE IF NOT EXISTS `rooms_combats` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `uuid` CHAR(36) NOT NULL,
-  `room` INT UNSIGNED NOT NULL,
+  `container` CHAR(36) NOT NULL,
+  `condition` ENUM('success', 'failure') NOT NULL DEFAULT 'success',
   `desc` TINYTEXT NOT NULL,
   `enemies` JSON NOT NULL,
   `is_runnable` BOOLEAN NOT NULL DEFAULT FALSE,
@@ -61,6 +67,8 @@ CREATE TABLE IF NOT EXISTS `rooms_combats` (
 CREATE TABLE IF NOT EXISTS `rooms_npcs` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `uuid` CHAR(36) NOT NULL,
+  `container` CHAR(36) NOT NULL,
+  `condition` ENUM('success', 'failure') NOT NULL DEFAULT 'success',
   `npc` INT UNSIGNED NOT NULL,
   `desc` TINYTEXT NOT NULL,
   `gender` VARCHAR(24) NOT NULL,
@@ -73,12 +81,15 @@ CREATE TABLE IF NOT EXISTS `rooms_npcs` (
 CREATE TABLE IF NOT EXISTS `rooms_exits` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `uuid` CHAR(36) NOT NULL,
-  `room` INT UNSIGNED NOT NULL,
+  `container` CHAR(36) NOT NULL,
+  `condition` ENUM('success', 'failure') NOT NULL DEFAULT 'success',
   `desc` TINYTEXT NOT NULL,
   `exit` INT UNSIGNED NOT NULL,
   `is_hidden` BOOLEAN NOT NULL DEFAULT FALSE,
-  `investigation_dc` TINYINT UNSIGNED DEFAULT NULL,
+  `perception_dc` TINYINT UNSIGNED DEFAULT NULL,
+  `investigation_dc` TINYINT UNSIGNED DEFAULT NULL, # Check wether the door is locked/trapped
   `is_locked` BOOLEAN NOT NULL DEFAULT FALSE,
+  `is_trapped` BOOLEAN NOT NULL DEFAULT FALSE,
   `thievestools_dc` TINYINT UNSIGNED DEFAULT NULL,
   `is_breakable` BOOLEAN NOT NULL DEFAULT FALSE,
   `strength_dc` TINYINT UNSIGNED DEFAULT NULL,
