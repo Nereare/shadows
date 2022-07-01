@@ -55,8 +55,8 @@ if ( $auth->isLoggedIn() ) {
           <div class="content">
             <h2 class="title is-4">Foo</h2>
             <?php
-            $adv = new Nereare\Shadows\Adventure($db, 4);
-            var_dump( $adv );
+            //$adv = new Nereare\Shadows\Adventure($db, 4);
+            //var_dump( $adv );
             ?>
 
             <div class="field">

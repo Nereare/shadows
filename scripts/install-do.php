@@ -393,8 +393,8 @@ $tables = [
     "meta_licenses",
     "CREATE TABLE IF NOT EXISTS `meta_licenses` (
       `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-      `abbr` VARCHAR(128),
-      `fullname` VARCHAR(63) NOT NULL,
+      `abbr` VARCHAR(16),
+      `fullname` VARCHAR(128) NOT NULL,
       `link` TEXT NOT NULL,
       PRIMARY KEY (`id`),
       UNIQUE KEY `abbr` (`abbr`)
@@ -545,8 +545,8 @@ try {
   $stmt = $db->prepare( "INSERT INTO `meta_licenses` (`fullname`, `abbr`, `link`) VALUES (:fullname, :abbr, :link)" );
   foreach($inserts as $v) {
     $count++;
-    $stmt->bindParam(":fullname", $v[1]);
-    $stmt->bindParam(":abbr", $v[0]);
+    $stmt->bindParam(":fullname", $v[0]);
+    $stmt->bindParam(":abbr", $v[1]);
     $stmt->bindParam(":link", $v[2]);
     if ( !$stmt->execute() ) {
       // Step 6c - Query Error
